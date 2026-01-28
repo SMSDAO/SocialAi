@@ -51,6 +51,8 @@ It is built on a **parallel, auto‑healing, one‑file node architecture** powe
 
 ## 🧱 Architecture
 
+For a detailed architecture diagram and component descriptions, see [ARCHITECTURE.md](ARCHITECTURE.md).
+
 ### Public Layer (Astro + Vite)
 - SEO pages  
 - Profiles  
