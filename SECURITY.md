@@ -105,8 +105,11 @@ Beyond patching vulnerable dependencies, the implementation includes:
 
 ## Next Steps
 
+**IMPORTANT**: The root `package-lock.json` has been removed to ensure fresh dependency resolution with patched versions.
+
 1. **Install Updated Dependencies**:
    ```bash
+   # This will generate a new package-lock.json with secure versions
    npm install
    cd apps/admin && npm install
    cd ../public && npm install

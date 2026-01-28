@@ -15,8 +15,12 @@ This guide will help you set up and run the complete SocialAi v0.1 system.
 ```bash
 git clone https://github.com/SMSDAO/SocialAi.git
 cd SocialAi
+
+# Install dependencies (generates new lockfile with secure versions)
 npm install
 ```
+
+**Note**: The root `package-lock.json` is not included in the repository to ensure fresh dependency resolution with the latest secure versions (Angular 19.2.18, Astro 5.15.8). It will be automatically generated when you run `npm install`.
 
 ### 2. Database Setup
 
