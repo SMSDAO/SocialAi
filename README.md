@@ -90,8 +90,39 @@ For a detailed architecture diagram and component descriptions, see [ARCHITECTUR
 
 ## 🚀 Getting Started
 
+### Quick Start
+
 ```bash
-git clone https://github.com/<org>/socialai
-cd socialai
+git clone https://github.com/SMSDAO/SocialAi.git
+cd SocialAi
+
+# Install dependencies
 npm install
-npm run dev
+
+# Setup database
+createdb socialai
+psql -U postgres -d socialai -f db/schema.sql
+
+# Configure environment
+cp .env.example .env
+# Edit .env with your settings
+
+# Start the system
+npm run dev                # Backend + Workers
+npm run dev:public         # Public App (port 4321)
+npm run dev:admin          # Admin Console (port 4200)
+```
+
+### Access Points
+
+- 🔌 **Backend API**: http://localhost:3000
+- 🌐 **Public App**: http://localhost:4321
+- ⚙️ **Admin Console**: http://localhost:4200
+
+For detailed setup instructions, see [docs/INSTALLATION.md](docs/INSTALLATION.md).
+
+## 📚 Documentation
+
+- [Installation Guide](docs/INSTALLATION.md) - Complete setup and deployment guide
+- [API Reference](docs/API.md) - Full API documentation
+- [Architecture](ARCHITECTURE.md) - System architecture and component diagrams
