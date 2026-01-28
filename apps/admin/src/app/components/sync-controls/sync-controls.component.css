@@ -1,0 +1,103 @@
+.page-header {
+  margin-bottom: 2rem;
+}
+
+.text-secondary {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+}
+
+.sync-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  gap: 1.5rem;
+}
+
+.sync-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.sync-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.sync-title {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.sync-title h3 {
+  margin: 0;
+  font-size: 1.125rem;
+}
+
+.sync-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  padding: 1rem;
+  background-color: var(--background);
+  border-radius: 0.375rem;
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-label {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  margin-bottom: 0.25rem;
+}
+
+.stat-value {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.sync-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.sync-actions button {
+  flex: 1;
+}
+
+.sync-progress {
+  margin-top: -0.5rem;
+}
+
+.progress-animated {
+  width: 100%;
+  animation: progress 2s ease-in-out infinite;
+}
+
+@keyframes progress {
+  0% {
+    transform: translateX(-100%);
+  }
+  50% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@media (max-width: 768px) {
+  .sync-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sync-stats {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,135 @@
+.page-header {
+  margin-bottom: 2rem;
+}
+
+.text-secondary {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+}
+
+.workers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 1.5rem;
+}
+
+.worker-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.worker-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.worker-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.worker-title h3 {
+  margin: 0;
+  font-size: 1.125rem;
+}
+
+.worker-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  padding: 1rem;
+  background-color: var(--background);
+  border-radius: 0.375rem;
+}
+
+.metric {
+  text-align: center;
+}
+
+.metric-label {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  margin-bottom: 0.25rem;
+}
+
+.metric-value {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.worker-resources {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.resource-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.25rem;
+  font-size: 0.875rem;
+}
+
+.resource-label {
+  font-weight: 500;
+}
+
+.resource-value {
+  color: var(--text-secondary);
+}
+
+.progress-bar {
+  height: 0.5rem;
+  background-color: var(--border-color);
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background-color: var(--primary-color);
+  transition: width 0.3s ease;
+}
+
+.progress-warning {
+  background-color: var(--warning-color);
+}
+
+.progress-danger {
+  background-color: var(--danger-color);
+}
+
+.worker-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  background-color: var(--background);
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+}
+
+.info-item {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.worker-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.worker-actions button {
+  flex: 1;
+}
+
+@media (max-width: 768px) {
+  .workers-grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,90 @@
+---
+// Base layout for all pages
+const { title = 'SocialAi - The Open Social Index' } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content="The Open Social Index & Identity Claim Network" />
+    <slot name="head" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: system-ui, -apple-system, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        background: #f5f5f5;
+      }
+      header {
+        background: #fff;
+        border-bottom: 1px solid #e0e0e0;
+        padding: 1rem 2rem;
+      }
+      nav {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      nav h1 {
+        font-size: 1.5rem;
+        font-weight: 700;
+      }
+      nav ul {
+        list-style: none;
+        display: flex;
+        gap: 2rem;
+      }
+      nav a {
+        color: #333;
+        text-decoration: none;
+        font-weight: 500;
+      }
+      nav a:hover {
+        color: #0066cc;
+      }
+      main {
+        max-width: 1200px;
+        margin: 2rem auto;
+        padding: 0 2rem;
+      }
+      footer {
+        background: #fff;
+        border-top: 1px solid #e0e0e0;
+        padding: 2rem;
+        text-align: center;
+        margin-top: 4rem;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <h1><a href="/">🌐 SocialAi</a></h1>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/profiles">Profiles</a></li>
+          <li><a href="/timeline">Timeline</a></li>
+          <li><a href="/claim">Claim Profile</a></li>
+        </ul>
+      </nav>
+    </header>
+    
+    <main>
+      <slot />
+    </main>
+    
+    <footer>
+      <p>&copy; {new Date().getFullYear()} SocialAi - The Open Social Index</p>
+    </footer>
+  </body>
+</html>

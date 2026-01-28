@@ -1,0 +1,117 @@
+<div class="worker-health">
+  <div class="page-header">
+    <h2>Worker Health Monitor</h2>
+    <p class="text-secondary">Monitor and manage parallel workers</p>
+  </div>
+
+  <div *ngIf="loading" class="loading">
+    <div class="spinner"></div>
+  </div>
+
+  <div *ngIf="error" class="alert alert-error">
+    {{ error }}
+  </div>
+
+  <div *ngIf="!loading && workers.length > 0" class="workers-grid">
+    <div *ngFor="let worker of workers" class="worker-card card">
+      <div class="worker-header">
+        <div class="worker-title">
+          <span 
+            class="status-indicator" 
+            [class.status-healthy]="worker.status === 'healthy'"
+            [class.status-warning]="worker.status === 'warning'"
+            [class.status-error]="worker.status === 'error'">
+          </span>
+          <h3>{{ worker.name }}</h3>
+        </div>
+        <span 
+          class="badge"
+          [class.badge-success]="worker.status === 'healthy'"
+          [class.badge-warning]="worker.status === 'warning'"
+          [class.badge-danger]="worker.status === 'error'">
+          {{ worker.status }}
+        </span>
+      </div>
+
+      <div class="worker-metrics">
+        <div class="metric">
+          <div class="metric-label">Uptime</div>
+          <div class="metric-value">{{ formatUptime(worker.uptime) }}</div>
+        </div>
+        <div class="metric">
+          <div class="metric-label">Tasks</div>
+          <div class="metric-value">{{ worker.tasksProcessed }}</div>
+        </div>
+        <div class="metric">
+          <div class="metric-label">Errors</div>
+          <div class="metric-value">{{ worker.errorCount }}</div>
+        </div>
+      </div>
+
+      <div class="worker-resources" *ngIf="worker.memoryUsage || worker.cpuUsage">
+        <div class="resource">
+          <div class="resource-header">
+            <span class="resource-label">Memory</span>
+            <span class="resource-value">{{ worker.memoryUsage }} MB</span>
+          </div>
+          <div class="progress-bar">
+            <div 
+              class="progress-fill" 
+              [style.width.%]="(worker.memoryUsage! / 2048) * 100">
+            </div>
+          </div>
+        </div>
+        <div class="resource">
+          <div class="resource-header">
+            <span class="resource-label">CPU</span>
+            <span class="resource-value">{{ worker.cpuUsage }}%</span>
+          </div>
+          <div class="progress-bar">
+            <div 
+              class="progress-fill" 
+              [style.width.%]="worker.cpuUsage"
+              [class.progress-warning]="worker.cpuUsage! > 70"
+              [class.progress-danger]="worker.cpuUsage! > 90">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="worker-info">
+        <div class="info-item">
+          <strong>Type:</strong> {{ worker.type }}
+        </div>
+        <div class="info-item">
+          <strong>Last Heartbeat:</strong> {{ getTimeSinceLastHeartbeat(worker.lastHeartbeat) }}
+        </div>
+      </div>
+
+      <div class="worker-actions">
+        <button 
+          class="btn btn-primary" 
+          (click)="restartWorker(worker.id)"
+          [disabled]="processingWorker === worker.id">
+          Restart
+        </button>
+        <button 
+          class="btn btn-secondary" 
+          (click)="stopWorker(worker.id)"
+          [disabled]="processingWorker === worker.id || worker.status === 'stopped'">
+          Stop
+        </button>
+        <button 
+          class="btn btn-success" 
+          (click)="startWorker(worker.id)"
+          [disabled]="processingWorker === worker.id || worker.status !== 'stopped'">
+          Start
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="!loading && workers.length === 0" class="empty-state">
+    <div class="empty-state-icon">⚙️</div>
+    <h3>No Workers Found</h3>
+    <p>No workers are currently registered in the system.</p>
+  </div>
+</div>

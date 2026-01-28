@@ -1,0 +1,113 @@
+<div class="dashboard">
+  <div class="dashboard-header">
+    <h2>System Dashboard</h2>
+    <p class="text-secondary">Real-time system metrics and worker status</p>
+  </div>
+
+  <div *ngIf="loading" class="loading">
+    <div class="spinner"></div>
+  </div>
+
+  <div *ngIf="error" class="alert alert-error">
+    {{ error }}
+  </div>
+
+  <div *ngIf="!loading && metrics">
+    <div class="grid grid-cols-4">
+      <div class="metric-card">
+        <div class="metric-value">{{ getHealthyWorkersCount() }}/{{ metrics.totalWorkers }}</div>
+        <div class="metric-label">Healthy Workers</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-value">{{ metrics.tasksProcessed }}</div>
+        <div class="metric-label">Tasks Processed</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-value">{{ metrics.errorRate }}%</div>
+        <div class="metric-label">Error Rate</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-value">{{ formatUptime(metrics.uptime) }}</div>
+        <div class="metric-label">System Uptime</div>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-2">
+      <div class="card">
+        <h3>System Resources</h3>
+        <div class="resource-item">
+          <div class="resource-label">
+            <span>CPU Usage</span>
+            <span class="resource-value">{{ metrics.cpuUsage }}%</span>
+          </div>
+          <div class="progress-bar">
+            <div 
+              class="progress-fill" 
+              [style.width.%]="metrics.cpuUsage"
+              [class.progress-warning]="metrics.cpuUsage > 70"
+              [class.progress-danger]="metrics.cpuUsage > 90">
+            </div>
+          </div>
+        </div>
+        <div class="resource-item">
+          <div class="resource-label">
+            <span>Memory Usage</span>
+            <span class="resource-value">{{ metrics.memoryUsage }} MB</span>
+          </div>
+          <div class="progress-bar">
+            <div 
+              class="progress-fill" 
+              [style.width.%]="(metrics.memoryUsage / 8192) * 100"
+              [class.progress-warning]="metrics.memoryUsage > 5734"
+              [class.progress-danger]="metrics.memoryUsage > 7372">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Worker Status Overview</h3>
+        <div class="worker-status-grid">
+          <div *ngFor="let worker of workers" class="worker-status-item">
+            <span 
+              class="status-indicator" 
+              [class.status-healthy]="worker.status === 'healthy'"
+              [class.status-warning]="worker.status === 'warning'"
+              [class.status-error]="worker.status === 'error'">
+            </span>
+            <div class="worker-status-info">
+              <div class="worker-name">{{ worker.name }}</div>
+              <div class="worker-stats">{{ worker.tasksProcessed }} tasks</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Recent Activity</h3>
+      <div class="activity-list">
+        <div class="activity-item">
+          <span class="badge badge-success">Success</span>
+          <span>Farcaster Worker completed sync - 1,234 records processed</span>
+          <span class="activity-time">2 minutes ago</span>
+        </div>
+        <div class="activity-item">
+          <span class="badge badge-info">Info</span>
+          <span>AI Worker started processing batch</span>
+          <span class="activity-time">5 minutes ago</span>
+        </div>
+        <div class="activity-item">
+          <span class="badge badge-warning">Warning</span>
+          <span>Ethereum RPC experiencing high latency</span>
+          <span class="activity-time">8 minutes ago</span>
+        </div>
+        <div class="activity-item">
+          <span class="badge badge-success">Success</span>
+          <span>Search Worker indexed 2,134 documents</span>
+          <span class="activity-time">15 minutes ago</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

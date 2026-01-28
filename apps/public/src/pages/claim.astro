@@ -1,0 +1,437 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const title = 'Claim Your Profile - SocialAi';
+const description = 'Verify your identity and claim your SocialAi profile through Farcaster Sign-In or wallet verification.';
+---
+
+<Layout title={title}>
+  <meta slot="head" name="description" content={description} />
+  <meta slot="head" property="og:title" content={title} />
+  <meta slot="head" property="og:description" content={description} />
+
+  <style>
+    .claim-container {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .claim-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    .claim-icon {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+    }
+    .claim-header h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      color: #333;
+    }
+    .claim-header p {
+      font-size: 1.125rem;
+      color: #666;
+      line-height: 1.7;
+    }
+    .claim-card {
+      background: white;
+      border-radius: 12px;
+      padding: 2.5rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      margin-bottom: 2rem;
+    }
+    .claim-steps {
+      margin-bottom: 2rem;
+    }
+    .step {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      align-items: flex-start;
+    }
+    .step-number {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #667eea;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .step-content h3 {
+      font-size: 1.125rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: #333;
+    }
+    .step-content p {
+      color: #666;
+      line-height: 1.6;
+    }
+    .claim-methods {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    .claim-method {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.5rem;
+      border: 2px solid #e0e0e0;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .claim-method:hover {
+      border-color: #667eea;
+      background: #f8f9ff;
+    }
+    .claim-method input[type="radio"] {
+      width: 20px;
+      height: 20px;
+      accent-color: #667eea;
+    }
+    .method-icon {
+      font-size: 2rem;
+    }
+    .method-info {
+      flex: 1;
+    }
+    .method-name {
+      font-size: 1.125rem;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+      color: #333;
+    }
+    .method-description {
+      font-size: 0.875rem;
+      color: #666;
+    }
+    .form-section {
+      margin-bottom: 2rem;
+    }
+    .form-section.hidden {
+      display: none;
+    }
+    .form-label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: #333;
+    }
+    .form-input {
+      width: 100%;
+      padding: 0.875rem 1.25rem;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: border-color 0.2s;
+    }
+    .form-input:focus {
+      outline: none;
+      border-color: #667eea;
+    }
+    .form-help {
+      font-size: 0.875rem;
+      color: #999;
+      margin-top: 0.5rem;
+    }
+    .btn-primary {
+      width: 100%;
+      padding: 1rem 2rem;
+      background: #667eea;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.125rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-primary:hover {
+      background: #5568d3;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+    }
+    .btn-primary:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+      transform: none;
+    }
+    .features-list {
+      background: #f8f9ff;
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-top: 2rem;
+    }
+    .features-list h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: #333;
+    }
+    .features-list ul {
+      list-style: none;
+    }
+    .features-list li {
+      padding: 0.5rem 0;
+      color: #666;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .features-list li::before {
+      content: "✓";
+      color: #667eea;
+      font-weight: 700;
+      font-size: 1.25rem;
+    }
+    .alert {
+      padding: 1rem;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+    }
+    .alert-info {
+      background: #e3f2fd;
+      color: #1976d2;
+    }
+    .alert-success {
+      background: #e8f5e9;
+      color: #388e3c;
+    }
+    .alert-error {
+      background: #ffebee;
+      color: #d32f2f;
+    }
+  </style>
+
+  <div class="claim-container">
+    <div class="claim-header">
+      <div class="claim-icon">🪪</div>
+      <h1>Claim Your Profile</h1>
+      <p>
+        Verify your identity to unlock profile editing, AI tools, and connect your social presence across networks.
+      </p>
+    </div>
+
+    <div class="claim-card">
+      <div class="claim-steps">
+        <h2 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1.5rem; color: #333;">How It Works</h2>
+        
+        <div class="step">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h3>Choose Verification Method</h3>
+            <p>Select Farcaster Sign-In or wallet verification (SIWE)</p>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h3>Verify Your Identity</h3>
+            <p>Connect your wallet or Farcaster account to prove ownership</p>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <h3>Claim Complete</h3>
+            <p>Access your profile dashboard and unlock premium features</p>
+          </div>
+        </div>
+      </div>
+
+      <form id="claim-form">
+        <div class="claim-methods">
+          <label class="claim-method">
+            <input type="radio" name="method" value="farcaster" checked />
+            <div class="method-icon">🟣</div>
+            <div class="method-info">
+              <div class="method-name">Farcaster Sign-In</div>
+              <div class="method-description">Connect with your Farcaster account</div>
+            </div>
+          </label>
+
+          <label class="claim-method">
+            <input type="radio" name="method" value="wallet" />
+            <div class="method-icon">👛</div>
+            <div class="method-info">
+              <div class="method-name">Wallet Verification</div>
+              <div class="method-description">Sign in with Ethereum (SIWE)</div>
+            </div>
+          </label>
+        </div>
+
+        <div id="farcaster-section" class="form-section">
+          <label class="form-label" for="farcaster-username">
+            Farcaster Username
+          </label>
+          <input 
+            type="text" 
+            id="farcaster-username" 
+            class="form-input" 
+            placeholder="yourname"
+            autocomplete="off"
+          />
+          <p class="form-help">
+            Enter your Farcaster username without the @ symbol
+          </p>
+        </div>
+
+        <div id="wallet-section" class="form-section hidden">
+          <label class="form-label" for="wallet-address">
+            Ethereum Wallet Address
+          </label>
+          <input 
+            type="text" 
+            id="wallet-address" 
+            class="form-input" 
+            placeholder="0x..."
+            autocomplete="off"
+          />
+          <p class="form-help">
+            Your Ethereum wallet address (ENS names supported)
+          </p>
+        </div>
+
+        <div id="alert-container"></div>
+
+        <button type="submit" class="btn-primary" id="submit-btn">
+          Continue to Verification
+        </button>
+      </form>
+
+      <div class="features-list">
+        <h3>🎁 What You'll Unlock:</h3>
+        <ul>
+          <li>Edit your profile and customize your presence</li>
+          <li>Access AI-powered profile optimization</li>
+          <li>Get personalized content recommendations</li>
+          <li>Connect multiple social accounts</li>
+          <li>View advanced analytics and insights</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById('claim-form') as HTMLFormElement;
+    const methodRadios = document.querySelectorAll('input[name="method"]');
+    const farcasterSection = document.getElementById('farcaster-section');
+    const walletSection = document.getElementById('wallet-section');
+    const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement;
+    const alertContainer = document.getElementById('alert-container');
+
+    function showAlert(message: string, type: 'info' | 'success' | 'error') {
+      if (alertContainer) {
+        alertContainer.innerHTML = `<div class="alert alert-${type}">${message}</div>`;
+      }
+    }
+
+    methodRadios.forEach(radio => {
+      radio.addEventListener('change', (e) => {
+        const method = (e.target as HTMLInputElement).value;
+        
+        if (method === 'farcaster') {
+          farcasterSection?.classList.remove('hidden');
+          walletSection?.classList.add('hidden');
+        } else {
+          farcasterSection?.classList.add('hidden');
+          walletSection?.classList.remove('hidden');
+        }
+      });
+    });
+
+    form?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const method = (document.querySelector('input[name="method"]:checked') as HTMLInputElement)?.value;
+      
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Verifying...';
+      
+      try {
+        const API_URL = import.meta.env.PUBLIC_API_URL || 'http://localhost:3000';
+        let endpoint = '';
+        let body: any = {};
+
+        if (method === 'farcaster') {
+          const username = (document.getElementById('farcaster-username') as HTMLInputElement)?.value;
+          if (!username) {
+            showAlert('Please enter your Farcaster username', 'error');
+            return;
+          }
+          endpoint = `${API_URL}/api/auth/farcaster`;
+          body = { username };
+        } else {
+          const address = (document.getElementById('wallet-address') as HTMLInputElement)?.value;
+          if (!address) {
+            showAlert('Please enter your wallet address', 'error');
+            return;
+          }
+          // Validate Ethereum address format
+          if (!/^0x[a-fA-F0-9]{40}$/.test(address) && !/\.eth$/.test(address)) {
+            showAlert('Please enter a valid Ethereum address (0x...) or ENS name', 'error');
+            return;
+          }
+          endpoint = `${API_URL}/api/auth/siwe`;
+          body = { address };
+        }
+
+        const response = await fetch(endpoint, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(body),
+        });
+
+        if (response.ok) {
+          let data;
+          try {
+            data = await response.json();
+          } catch (parseError) {
+            showAlert('Invalid response from server. Please try again.', 'error');
+            return;
+          }
+          showAlert('Verification successful! Redirecting...', 'success');
+          
+          setTimeout(() => {
+            if (data.profileUrl) {
+              window.location.href = data.profileUrl;
+            } else {
+              window.location.href = '/profiles';
+            }
+          }, 1500);
+        } else {
+          let errorMessage = 'Verification failed. Please try again.';
+          try {
+            const error = await response.json();
+            errorMessage = error.message || errorMessage;
+          } catch (e) {
+            // Use default error message if response isn't JSON
+          }
+          showAlert(errorMessage, 'error');
+        }
+      } catch (error) {
+        console.error('Claim error:', error);
+        const isNetworkError = error instanceof TypeError && error.message.includes('fetch');
+        const message = isNetworkError 
+          ? 'Network error: Unable to connect to verification service. Please check your connection.'
+          : 'An unexpected error occurred. Please try again later.';
+        showAlert(message, 'error');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Continue to Verification';
+      }
+    });
+  </script>
+</Layout>

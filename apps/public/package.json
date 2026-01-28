@@ -1,0 +1,19 @@
+{
+  "name": "socialai-public",
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "astro": "^5.15.8"
+  },
+  "devDependencies": {
+    "@astrojs/node": "^8.0.0",
+    "@types/node": "^20.10.5",
+    "typescript": "^5.3.3"
+  }
+}

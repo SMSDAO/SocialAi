@@ -1,0 +1,57 @@
+<div class="feature-flags">
+  <div class="page-header">
+    <h2>Feature Flags</h2>
+    <p class="text-secondary">Toggle features on/off across the system</p>
+  </div>
+
+  <div *ngIf="loading" class="loading">
+    <div class="spinner"></div>
+  </div>
+
+  <div *ngIf="error" class="alert alert-error">
+    {{ error }}
+  </div>
+
+  <div *ngIf="!loading && featureFlags.length > 0" class="flags-container">
+    <div *ngFor="let flag of featureFlags" class="flag-card card">
+      <div class="flag-header">
+        <div class="flag-info">
+          <h3>{{ flag.name }}</h3>
+          <p class="flag-key">{{ flag.key }}</p>
+        </div>
+        <label class="toggle-switch">
+          <input 
+            type="checkbox" 
+            [checked]="flag.enabled"
+            [disabled]="isToggling(flag.id)"
+            (change)="toggleFlag(flag)">
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+
+      <p class="flag-description">{{ flag.description }}</p>
+
+      <div class="flag-meta">
+        <div class="meta-item">
+          <strong>Status:</strong>
+          <span 
+            class="badge"
+            [class.badge-success]="flag.enabled"
+            [class.badge-danger]="!flag.enabled">
+            {{ flag.enabled ? 'Enabled' : 'Disabled' }}
+          </span>
+        </div>
+        <div class="meta-item">
+          <strong>Last Updated:</strong>
+          <span class="text-secondary">{{ formatDate(flag.updatedAt) }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="!loading && featureFlags.length === 0" class="empty-state">
+    <div class="empty-state-icon">🚩</div>
+    <h3>No Feature Flags</h3>
+    <p>No feature flags are configured in the system.</p>
+  </div>
+</div>

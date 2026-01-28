@@ -1,0 +1,78 @@
+<div class="sync-controls">
+  <div class="page-header">
+    <h2>Sync Controls</h2>
+    <p class="text-secondary">Manage data synchronization from external sources</p>
+  </div>
+
+  <div *ngIf="loading" class="loading">
+    <div class="spinner"></div>
+  </div>
+
+  <div *ngIf="error" class="alert alert-error">
+    {{ error }}
+  </div>
+
+  <div *ngIf="!loading && syncControls.length > 0" class="sync-grid">
+    <div *ngFor="let control of syncControls" class="sync-card card">
+      <div class="sync-header">
+        <div class="sync-title">
+          <h3>{{ control.source }}</h3>
+          <span 
+            class="badge"
+            [class.badge-success]="control.status === 'idle'"
+            [class.badge-info]="control.status === 'syncing'"
+            [class.badge-danger]="control.status === 'error'">
+            {{ control.status }}
+          </span>
+        </div>
+        <label class="toggle-switch">
+          <input 
+            type="checkbox" 
+            [checked]="control.enabled"
+            [disabled]="isProcessing(control.id)"
+            (change)="toggleSync(control)">
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+
+      <div class="sync-stats">
+        <div class="stat-item">
+          <div class="stat-label">Records Processed</div>
+          <div class="stat-value">{{ control.recordsProcessed.toLocaleString() }}</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">Last Sync</div>
+          <div class="stat-value">{{ formatDate(control.lastSync) }}</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">Next Sync</div>
+          <div class="stat-value">
+            {{ control.enabled ? getTimeUntilNextSync(control.nextSync) : 'Disabled' }}
+          </div>
+        </div>
+      </div>
+
+      <div class="sync-actions">
+        <button 
+          class="btn btn-primary" 
+          (click)="triggerSync(control.id)"
+          [disabled]="!control.enabled || isProcessing(control.id) || control.status === 'syncing'">
+          <span *ngIf="control.status === 'syncing'">⏳ Syncing...</span>
+          <span *ngIf="control.status !== 'syncing'">▶️ Trigger Sync</span>
+        </button>
+      </div>
+
+      <div class="sync-progress" *ngIf="control.status === 'syncing'">
+        <div class="progress-bar">
+          <div class="progress-fill progress-animated"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="!loading && syncControls.length === 0" class="empty-state">
+    <div class="empty-state-icon">🔄</div>
+    <h3>No Sync Controls</h3>
+    <p>No synchronization sources are configured.</p>
+  </div>
+</div>

@@ -1,0 +1,102 @@
+.dashboard-header {
+  margin-bottom: 2rem;
+}
+
+.text-secondary {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+}
+
+.resource-item {
+  margin-bottom: 1.5rem;
+}
+
+.resource-item:last-child {
+  margin-bottom: 0;
+}
+
+.resource-label {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.resource-value {
+  color: var(--text-secondary);
+}
+
+.progress-bar {
+  height: 0.5rem;
+  background-color: var(--border-color);
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background-color: var(--primary-color);
+  transition: width 0.3s ease;
+}
+
+.progress-warning {
+  background-color: var(--warning-color);
+}
+
+.progress-danger {
+  background-color: var(--danger-color);
+}
+
+.worker-status-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.worker-status-item {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem;
+  background-color: var(--background);
+  border-radius: 0.375rem;
+}
+
+.worker-status-info {
+  flex: 1;
+}
+
+.worker-name {
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+}
+
+.worker-stats {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.activity-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.activity-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem;
+  background-color: var(--background);
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+}
+
+.activity-item > span:nth-child(2) {
+  flex: 1;
+}
+
+.activity-time {
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  white-space: nowrap;
+}
