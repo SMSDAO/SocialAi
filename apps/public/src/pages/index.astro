@@ -1,0 +1,218 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const title = 'SocialAi - The Open Social Index & Identity Claim Network';
+const description = 'AI-powered social discovery engine that mirrors public Farcaster activity, blends Reddit timelines, and exposes SEO-optimized public profiles that you can claim.';
+
+// Fetch stats from API
+const API_URL = import.meta.env.PUBLIC_API_URL || 'http://localhost:3000';
+let stats = {
+  profiles: 0,
+  posts: 0,
+  claims: 0,
+  networks: 3
+};
+
+try {
+  const response = await fetch(`${API_URL}/api/stats`);
+  if (response.ok) {
+    stats = await response.json();
+  }
+} catch (error) {
+  console.error('Failed to fetch stats:', error);
+}
+---
+
+<Layout title={title}>
+  <meta slot="head" name="description" content={description} />
+  <meta slot="head" property="og:title" content={title} />
+  <meta slot="head" property="og:description" content={description} />
+  <meta slot="head" property="og:type" content="website" />
+  <meta slot="head" name="twitter:card" content="summary_large_image" />
+  <meta slot="head" name="twitter:title" content={title} />
+  <meta slot="head" name="twitter:description" content={description} />
+
+  <style>
+    .hero {
+      text-align: center;
+      padding: 4rem 0;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border-radius: 12px;
+      margin-bottom: 4rem;
+    }
+    .hero h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+    }
+    .hero p {
+      font-size: 1.25rem;
+      max-width: 600px;
+      margin: 0 auto 2rem;
+      opacity: 0.95;
+    }
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-block;
+      padding: 0.875rem 2rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+    .btn-primary {
+      background: white;
+      color: #667eea;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    .btn-secondary {
+      background: rgba(255,255,255,0.2);
+      color: white;
+      border: 2px solid white;
+    }
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.3);
+    }
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-bottom: 4rem;
+    }
+    .feature-card {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .feature-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+    }
+    .feature-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+    .feature-card h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      color: #667eea;
+    }
+    .feature-card p {
+      color: #666;
+      line-height: 1.7;
+    }
+    .stats {
+      background: white;
+      border-radius: 12px;
+      padding: 3rem;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    .stats h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 2rem;
+      color: #333;
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+    }
+    .stat-item {
+      padding: 1.5rem;
+    }
+    .stat-number {
+      font-size: 3rem;
+      font-weight: 800;
+      color: #667eea;
+      margin-bottom: 0.5rem;
+    }
+    .stat-label {
+      font-size: 1.125rem;
+      color: #666;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 600;
+    }
+  </style>
+
+  <div class="hero">
+    <h1>🌐 The Open Social Index</h1>
+    <p>
+      Discover, claim, and optimize your social presence across Farcaster, Reddit, and beyond with AI-powered insights.
+    </p>
+    <div class="hero-buttons">
+      <a href="/profiles" class="btn btn-primary">Explore Profiles</a>
+      <a href="/claim" class="btn btn-secondary">Claim Your Profile</a>
+    </div>
+  </div>
+
+  <div class="features">
+    <div class="feature-card">
+      <div class="feature-icon">🔍</div>
+      <h3>SEO-Optimized Profiles</h3>
+      <p>
+        Every profile is Google-indexable with fast SSR rendering. Zero JavaScript by default for maximum performance and discoverability.
+      </p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon">🪪</div>
+      <h3>Identity Claim System</h3>
+      <p>
+        Verify your identity through Farcaster Sign-In and wallet verification. Claim your profile to unlock editing and AI tools.
+      </p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon">🌐</div>
+      <h3>Multi-Network Sync</h3>
+      <p>
+        Aggregate content from Farcaster, Reddit, and more. All your social activity in one discoverable place with admin-controlled feeds.
+      </p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon">🤖</div>
+      <h3>AI-Powered Insights</h3>
+      <p>
+        Get timeline summaries, profile optimization, topic clustering, and personalized recommendations powered by SmartBrain.
+      </p>
+    </div>
+  </div>
+
+  <div class="stats">
+    <h2>Platform Statistics</h2>
+    <div class="stats-grid">
+      <div class="stat-item">
+        <div class="stat-number">{stats.profiles.toLocaleString()}</div>
+        <div class="stat-label">Profiles</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">{stats.posts.toLocaleString()}</div>
+        <div class="stat-label">Posts</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">{stats.claims.toLocaleString()}</div>
+        <div class="stat-label">Claims</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">{stats.networks}</div>
+        <div class="stat-label">Networks</div>
+      </div>
+    </div>
+  </div>
+</Layout>

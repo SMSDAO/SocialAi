@@ -1,0 +1,29 @@
+{
+  "name": "socialai",
+  "version": "0.1.0",
+  "description": "The Open Social Index & Identity Claim Network",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "node",
+    "workers"
+  ],
+  "scripts": {
+    "dev": "node node/socialai.node.js",
+    "dev:public": "cd apps/public && npm run dev",
+    "dev:admin": "cd apps/admin && npm start",
+    "build": "npm run build:public && npm run build:admin",
+    "build:public": "cd apps/public && npm run build",
+    "build:admin": "cd apps/admin && npm run build",
+    "db:init": "psql -U postgres -f db/schema.sql",
+    "postinstall": "cd apps/public && npm install && cd ../admin && npm install && cd ../../node && npm install && cd ../workers && npm install"
+  },
+  "keywords": [
+    "social",
+    "farcaster",
+    "identity",
+    "ai"
+  ],
+  "author": "SocialAi Team",
+  "license": "MIT"
+}

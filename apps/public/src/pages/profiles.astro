@@ -1,0 +1,239 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const title = 'Profiles - SocialAi';
+const description = 'Browse public profiles on SocialAi. Discover creators, developers, and communities across Farcaster and beyond.';
+
+const API_URL = import.meta.env.PUBLIC_API_URL || 'http://localhost:3000';
+let profiles = [];
+let error = null;
+
+try {
+  const response = await fetch(`${API_URL}/api/profiles?limit=50`);
+  if (response.ok) {
+    profiles = await response.json();
+  } else {
+    error = 'Failed to load profiles';
+  }
+} catch (err) {
+  console.error('Failed to fetch profiles:', err);
+  error = 'Failed to connect to API';
+}
+---
+
+<Layout title={title}>
+  <meta slot="head" name="description" content={description} />
+  <meta slot="head" property="og:title" content={title} />
+  <meta slot="head" property="og:description" content={description} />
+
+  <style>
+    .page-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    .page-header h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 0.75rem;
+      color: #333;
+    }
+    .page-header p {
+      font-size: 1.125rem;
+      color: #666;
+    }
+    .search-bar {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      margin-bottom: 2rem;
+    }
+    .search-bar input {
+      width: 100%;
+      padding: 0.875rem 1.25rem;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: border-color 0.2s;
+    }
+    .search-bar input:focus {
+      outline: none;
+      border-color: #667eea;
+    }
+    .profiles-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+    .profile-card {
+      background: white;
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      transition: transform 0.2s, box-shadow 0.2s;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+    .profile-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+    }
+    .profile-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+    .profile-avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: white;
+    }
+    .profile-info h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+      color: #333;
+    }
+    .profile-username {
+      color: #667eea;
+      font-weight: 600;
+    }
+    .profile-bio {
+      color: #666;
+      line-height: 1.6;
+      margin-bottom: 1rem;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .profile-stats {
+      display: flex;
+      gap: 1.5rem;
+      padding-top: 1rem;
+      border-top: 1px solid #f0f0f0;
+    }
+    .stat {
+      display: flex;
+      flex-direction: column;
+    }
+    .stat-value {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #667eea;
+    }
+    .stat-label {
+      font-size: 0.875rem;
+      color: #999;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .error-message {
+      background: #fee;
+      color: #c33;
+      padding: 1rem;
+      border-radius: 8px;
+      text-align: center;
+    }
+    .empty-state {
+      text-align: center;
+      padding: 4rem 2rem;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    .empty-state h2 {
+      font-size: 1.5rem;
+      color: #666;
+      margin-bottom: 1rem;
+    }
+  </style>
+
+  <div class="page-header">
+    <h1>Discover Profiles</h1>
+    <p>Browse the open social index and discover amazing creators</p>
+  </div>
+
+  <div class="search-bar">
+    <input 
+      type="search" 
+      placeholder="Search profiles by name or username..." 
+      id="profile-search"
+    />
+  </div>
+
+  {error ? (
+    <div class="error-message">
+      {error}
+    </div>
+  ) : profiles.length === 0 ? (
+    <div class="empty-state">
+      <h2>No profiles found</h2>
+      <p>Be the first to claim your profile!</p>
+    </div>
+  ) : (
+    <div class="profiles-grid" id="profiles-container">
+      {profiles.map((profile: any) => (
+        <a href={`/profile/${profile.username}`} class="profile-card">
+          <div class="profile-header">
+            <div class="profile-avatar">
+              {profile.avatar ? (
+                <img src={profile.avatar} alt={profile.displayName} style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;" />
+              ) : (
+                profile.displayName?.[0]?.toUpperCase() || profile.username[0].toUpperCase()
+              )}
+            </div>
+            <div class="profile-info">
+              <h3>{profile.displayName || profile.username}</h3>
+              <div class="profile-username">@{profile.username}</div>
+            </div>
+          </div>
+          {profile.bio && (
+            <div class="profile-bio">{profile.bio}</div>
+          )}
+          <div class="profile-stats">
+            <div class="stat">
+              <span class="stat-value">{profile.followersCount || 0}</span>
+              <span class="stat-label">Followers</span>
+            </div>
+            <div class="stat">
+              <span class="stat-value">{profile.followingCount || 0}</span>
+              <span class="stat-label">Following</span>
+            </div>
+            <div class="stat">
+              <span class="stat-value">{profile.postsCount || 0}</span>
+              <span class="stat-label">Posts</span>
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+  )}
+
+  <script>
+    const searchInput = document.getElementById('profile-search') as HTMLInputElement;
+    const profilesContainer = document.getElementById('profiles-container');
+    
+    if (searchInput && profilesContainer) {
+      searchInput.addEventListener('input', (e) => {
+        const query = (e.target as HTMLInputElement).value.toLowerCase();
+        const cards = profilesContainer.querySelectorAll('.profile-card');
+        
+        cards.forEach((card) => {
+          const text = card.textContent?.toLowerCase() || '';
+          const shouldShow = text.includes(query);
+          (card as HTMLElement).style.display = shouldShow ? 'block' : 'none';
+        });
+      });
+    }
+  </script>
+</Layout>
