@@ -124,5 +124,6 @@ For detailed setup instructions, see [docs/INSTALLATION.md](docs/INSTALLATION.md
 ## 📚 Documentation
 
 - [Installation Guide](docs/INSTALLATION.md) - Complete setup and deployment guide
+- [Deployment Guide](DEPLOYMENT.md) - Production deployment guide for Vercel and OVH VPS
 - [API Reference](docs/API.md) - Full API documentation
 - [Architecture](ARCHITECTURE.md) - System architecture and component diagrams
