@@ -51,7 +51,7 @@ It is built on a **parallel, auto‑healing, one‑file node architecture** powe
 
 ## 🧱 Architecture
 
-For a detailed architecture diagram and component descriptions, see [ARCHITECTURE.md](ARCHITECTURE.md).
+For a detailed architecture diagram and component descriptions, see [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
 
 ### Public Layer (Astro + Vite)
 - SEO pages  
@@ -124,5 +124,6 @@ For detailed setup instructions, see [docs/INSTALLATION.md](docs/INSTALLATION.md
 ## 📚 Documentation
 
 - [Installation Guide](docs/INSTALLATION.md) - Complete setup and deployment guide
+- [Architecture](docs/ARCHITECTURE.md) - System architecture and component diagrams
+- [UI/UX Specifications](docs/UIUXSPECTS.md) - User interface and user experience guidelines
 - [API Reference](docs/API.md) - Full API documentation
-- [Architecture](ARCHITECTURE.md) - System architecture and component diagrams
