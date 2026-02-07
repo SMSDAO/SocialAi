@@ -421,3 +421,20 @@ CORS is enabled for all origins in development. In production, configure allowed
 ## WebSocket Support
 
 WebSocket support for real-time updates is planned for future releases.
+
+---
+
+## Related Documentation
+
+For more information, see:
+
+- **[Installation Guide](INSTALLATION.md)** - Setup instructions and environment configuration
+- **[Architecture Overview](ARCHITECTURE.md)** - System architecture and components
+- **[Development Guide](DEVELOPMENT.md)** - API development workflow and testing
+- **[Testing Guide](TESTING.md)** - API testing strategies and examples
+- **[Troubleshooting](TROUBLESHOOTING.md)** - Common API issues and solutions
+- **[Deployment Guide](DEPLOYMENT.md)** - Production deployment and configuration
+
+---
+
+*Last Updated: 2026-02-07*
