@@ -123,7 +123,21 @@ For detailed setup instructions, see [docs/INSTALLATION.md](docs/INSTALLATION.md
 
 ## 📚 Documentation
 
-- [Installation Guide](docs/INSTALLATION.md) - Complete setup and deployment guide
-- [Architecture](docs/ARCHITECTURE.md) - System architecture and component diagrams
-- [UI/UX Specifications](docs/UIUXSPECTS.md) - User interface and user experience guidelines
-- [API Reference](docs/API.md) - Full API documentation
+### Core Documentation
+- **[📖 Documentation Index](docs/README.md)** - Complete documentation table of contents
+- **[⚙️ Installation Guide](docs/INSTALLATION.md)** - Complete setup and deployment guide
+- **[🏗️ Architecture](docs/ARCHITECTURE.md)** - System architecture and component diagrams
+- **[🎨 UI/UX Specifications](docs/UIUXSPECTS.md)** - User interface and user experience guidelines
+- **[🔌 API Reference](docs/API.md)** - Full API documentation with examples
+
+### Developer Resources
+- **[💻 Development Guide](docs/DEVELOPMENT.md)** - Development workflow and best practices
+- **[🤝 Contributing Guidelines](docs/CONTRIBUTING.md)** - How to contribute to the project
+- **[✅ Testing Guide](docs/TESTING.md)** - Testing strategies and commands
+- **[🔧 Troubleshooting](docs/TROUBLESHOOTING.md)** - Common issues and solutions
+
+### Operations
+- **[🚀 Deployment Guide](docs/DEPLOYMENT.md)** - Production deployment instructions
+- **[🔒 Security Summary](SECURITY.md)** - Security vulnerabilities and remediation
+
+For a comprehensive overview and quick navigation, start with the **[Documentation Index](docs/README.md)**.
