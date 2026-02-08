@@ -276,10 +276,30 @@ npm run build
 
 For detailed architecture information, see [ARCHITECTURE.md](ARCHITECTURE.md).
 
+---
+
+## Related Documentation
+
+For more information, see:
+
+- **[Documentation Index](README.md)** - Complete documentation table of contents
+- **[Architecture Overview](ARCHITECTURE.md)** - System architecture and components
+- **[API Reference](API.md)** - REST API documentation
+- **[Development Guide](DEVELOPMENT.md)** - Development workflow and setup
+- **[Testing Guide](TESTING.md)** - Testing strategies
+- **[Troubleshooting](TROUBLESHOOTING.md)** - Common installation issues
+- **[Deployment Guide](DEPLOYMENT.md)** - Production deployment
+
+---
+
 ## License
 
-MIT License - see [LICENSE](LICENSE)
+MIT License - see [LICENSE](../LICENSE)
 
 ## Support
 
 For issues and questions, please open an issue on GitHub.
+
+---
+
+*Last Updated: 2026-02-07*
