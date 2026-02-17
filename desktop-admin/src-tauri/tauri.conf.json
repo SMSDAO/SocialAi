@@ -41,7 +41,7 @@
       }
     ],
     "security": {
-      "csp": "default-src 'self' 'unsafe-inline'; connect-src 'self' http://localhost:3000 http://localhost:4200"
+      "csp": "default-src 'self' 'unsafe-inline'; connect-src 'self' http://localhost:3000 http://localhost:4200; frame-src http://localhost:4200"
     }
   }
 }

@@ -160,8 +160,16 @@
             
             <div class="card">
                 <div class="card-title">Embedded Admin Console</div>
+                <p style="margin-bottom: 12px; color: var(--gh-fg-muted);">
+                    Connecting to local admin UI at http://localhost:4200
+                </p>
                 <div class="iframe-container">
-                    <iframe src="http://localhost:4200" title="Admin Console"></iframe>
+                    <!-- Security Note: This iframe loads from localhost only, which is safe for a local desktop app -->
+                    <iframe 
+                        src="http://localhost:4200" 
+                        title="Admin Console"
+                        sandbox="allow-same-origin allow-scripts allow-forms allow-popups"
+                    ></iframe>
                 </div>
             </div>
         </div>
