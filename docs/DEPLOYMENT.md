@@ -2,15 +2,18 @@
 
 This guide covers deploying SocialAi to production environments.
 
+**⚠️ IMPORTANT: Node.js 24+ Required**
+All deployment targets must support Node.js 24 or higher. See [Node 24+ Requirements](#node-24-requirements) section below.
+
 ---
 
 ## Table of Contents
 
-1. [Pre-Deployment Checklist](#pre-deployment-checklist)
-2. [Deployment Options](#deployment-options)
-3. [VPS Deployment](#vps-deployment)
-4. [Docker Deployment](#docker-deployment)
-5. [Cloud Platform Deployment](#cloud-platform-deployment)
+1. [Node 24+ Requirements](#node-24-requirements)
+2. [Pre-Deployment Checklist](#pre-deployment-checklist)
+3. [Vercel Deployment (Frontend)](#vercel-deployment-frontend)
+4. [Backend Deployment Options](#backend-deployment-options)
+5. [Desktop Admin Distribution](#desktop-admin-distribution)
 6. [Database Setup](#database-setup)
 7. [Environment Configuration](#environment-configuration)
 8. [SSL/TLS Setup](#ssltls-setup)
@@ -20,9 +23,48 @@ This guide covers deploying SocialAi to production environments.
 
 ---
 
+## Node 24+ Requirements
+
+SocialAi requires Node.js 24 or higher for all components.
+
+### Why Node.js 24+?
+- Modern JavaScript features
+- Performance improvements
+- Enhanced security
+- Long-term support
+
+### Verifying Node Version
+
+```bash
+node --version  # Should output v24.x.x or higher
+```
+
+### Platform Support
+
+**Verified Platforms with Node 24+ Support:**
+- ✅ Vercel (default for frontend)
+- ✅ Railway
+- ✅ Render
+- ✅ Fly.io
+- ✅ AWS EC2/ECS
+- ✅ Google Cloud Run
+- ✅ Azure App Service
+- ✅ DigitalOcean App Platform
+
+**Not Recommended:**
+- ❌ Platforms that don't support Node 24+
+- ❌ Heroku (unless updated runtime available)
+
+---
+
 ## Pre-Deployment Checklist
 
 Before deploying to production:
+
+### Node.js Version
+- [ ] Confirm Node.js 24+ on target platform
+- [ ] Test build with Node 24+
+- [ ] Update `.nvmrc` if needed (default: 24.13.0)
 
 ### Security
 
@@ -60,6 +102,182 @@ Before deploying to production:
 - [ ] Set up caching headers
 - [ ] Optimize database queries
 - [ ] Add database indexes
+
+---
+
+## Vercel Deployment (Frontend)
+
+The public frontend app is optimized for Vercel with Node.js 24 runtime.
+
+### Quick Deploy
+
+1. **Connect Repository**:
+   - Go to [vercel.com](https://vercel.com)
+   - Import your GitHub repository
+   - Select the `SocialAi` project
+
+2. **Configure Build Settings**:
+   ```
+   Framework Preset: Astro
+   Build Command: npm run build:public
+   Output Directory: apps/public/dist
+   Install Command: npm install
+   Node Version: 24.x
+   ```
+
+3. **Set Environment Variables**:
+   ```
+   DATABASE_URL=your_postgres_connection_string
+   JWT_SECRET=your_jwt_secret
+   SESSION_SECRET=your_session_secret
+   API_URL=your_backend_api_url
+   OPENAI_API_KEY=your_openai_key (optional)
+   NODE_ENV=production
+   ```
+
+4. **Deploy**:
+   - Click "Deploy"
+   - Vercel will automatically build and deploy
+
+### Using Vercel CLI
+
+```bash
+# Install Vercel CLI
+npm install -g vercel
+
+# Login
+vercel login
+
+# Deploy
+vercel
+
+# Deploy to production
+vercel --prod
+```
+
+### Vercel Configuration
+
+The `vercel.json` file is already configured with:
+- Node.js 24 runtime
+- Optimized build settings
+- Correct output directory
+- Static file serving
+
+### Custom Domain
+
+1. Go to Project Settings → Domains
+2. Add your custom domain
+3. Follow DNS configuration instructions
+4. SSL is automatically provisioned
+
+### Environment Variables
+
+Configure in Vercel Dashboard:
+1. Project Settings → Environment Variables
+2. Add each variable from `.env.example`
+3. Select environment (Production, Preview, Development)
+4. Save
+
+**Important**: Never commit secrets to the repository. Use Vercel's environment variable system.
+
+---
+
+## Backend Deployment Options
+
+The backend requires Node.js 24+ and can be deployed to various platforms.
+
+### Recommended: Railway
+
+Railway provides managed PostgreSQL and supports Node.js 24+.
+
+1. **Install Railway CLI**:
+```bash
+npm install -g @railway/cli
+```
+
+2. **Login and Deploy**:
+```bash
+railway login
+railway init
+railway up
+```
+
+3. **Configure**:
+- Add PostgreSQL service
+- Set environment variables
+- Deploy backend
+
+### Alternative: Render
+
+1. Create new Web Service on [render.com](https://render.com)
+2. Connect repository
+3. Configure:
+   ```
+   Build Command: npm install
+   Start Command: npm run dev
+   Node Version: 24
+   ```
+4. Add environment variables
+5. Deploy
+
+### Alternative: Fly.io
+
+1. Install Fly CLI
+2. Create `fly.toml`:
+```toml
+app = "socialai-backend"
+
+[build]
+  [build.env]
+    NODE_VERSION = "24"
+
+[env]
+  PORT = "3000"
+
+[[services]]
+  internal_port = 3000
+  protocol = "tcp"
+```
+3. Deploy: `fly deploy`
+
+---
+
+## Desktop Admin Distribution
+
+The Windows desktop admin app can be distributed to users.
+
+### Building for Windows
+
+On a Windows machine with Node 24+ and Rust:
+
+```bash
+npm run build:desktop:windows
+```
+
+This creates:
+- `admin.msi` - MSI installer
+- `admin-setup.exe` - NSIS installer
+
+Located in: `desktop-admin/src-tauri/target/release/bundle/`
+
+### Distribution Options
+
+1. **Direct Download**: Host installer files on your server
+2. **GitHub Releases**: Upload as release assets
+3. **Microsoft Store**: Submit for distribution (requires developer account)
+
+### Auto-Updates
+
+Configure auto-updates in `desktop-admin/src-tauri/tauri.conf.json`:
+```json
+{
+  "updater": {
+    "active": true,
+    "endpoints": ["https://yourdomain.com/releases"],
+    "dialog": true
+  }
+}
+```
 
 ---
 

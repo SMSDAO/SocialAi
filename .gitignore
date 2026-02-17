@@ -43,3 +43,20 @@ lerna-debug.log*
 tmp/
 temp/
 *.tmp
+
+# Tauri (Desktop Admin)
+desktop-admin/src-tauri/target/
+desktop-admin/dist/
+desktop-admin/node_modules/
+
+# Rust
+*.rs.bk
+Cargo.lock
+
+# Platform specific
+*.exe
+*.msi
+*.dmg
+*.app
+*.deb
+*.rpm
