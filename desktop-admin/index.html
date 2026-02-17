@@ -141,12 +141,12 @@
     
     <div class="container">
         <div class="sidebar">
-            <div class="nav-item active" onclick="showView('dashboard')">📊 Dashboard</div>
-            <div class="nav-item" onclick="showView('features')">🎛️ Feature Flags</div>
-            <div class="nav-item" onclick="showView('sync')">🔄 Sync Controls</div>
-            <div class="nav-item" onclick="showView('workers')">⚙️ Worker Health</div>
-            <div class="nav-item" onclick="showView('logs')">📝 Logs</div>
-            <div class="nav-item" onclick="showView('settings')">⚙️ Settings</div>
+            <div class="nav-item active" onclick="showView('dashboard', event)">📊 Dashboard</div>
+            <div class="nav-item" onclick="showView('features', event)">🎛️ Feature Flags</div>
+            <div class="nav-item" onclick="showView('sync', event)">🔄 Sync Controls</div>
+            <div class="nav-item" onclick="showView('workers', event)">⚙️ Worker Health</div>
+            <div class="nav-item" onclick="showView('logs', event)">📝 Logs</div>
+            <div class="nav-item" onclick="showView('settings', event)">⚙️ Settings</div>
         </div>
         
         <div class="main-content">
@@ -168,10 +168,12 @@
     </div>
     
     <script>
-        function showView(view) {
+        function showView(view, event) {
             const items = document.querySelectorAll('.nav-item');
             items.forEach(item => item.classList.remove('active'));
-            event.target.classList.add('active');
+            if (event && event.target) {
+                event.target.classList.add('active');
+            }
             console.log('Showing view:', view);
         }
         

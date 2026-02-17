@@ -44,7 +44,7 @@ const envContent = fs.readFileSync(envFile, 'utf8');
 const requiredVars = ['DATABASE_URL', 'JWT_SECRET', 'SESSION_SECRET'];
 const missingVars = requiredVars.filter(varName => {
   const regex = new RegExp(`^${varName}=.+$`, 'm');
-  return !regex.test(envContent) || envContent.includes(`${varName}=change_me`);
+  return !regex.test(envContent) || envContent.includes(`${varName}=PLACEHOLDER_`);
 });
 
 if (missingVars.length > 0) {
