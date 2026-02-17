@@ -171,8 +171,8 @@
         function showView(view, event) {
             const items = document.querySelectorAll('.nav-item');
             items.forEach(item => item.classList.remove('active'));
-            if (event && event.target) {
-                event.target.classList.add('active');
+            if (event && event.currentTarget) {
+                event.currentTarget.classList.add('active');
             }
             console.log('Showing view:', view);
         }
