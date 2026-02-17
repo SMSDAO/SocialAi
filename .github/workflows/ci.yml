@@ -31,21 +31,16 @@ jobs:
     
     - name: Install workspace dependencies
       run: |
-        cd apps/public && npm ci
-        cd ../admin && npm ci
-        cd ../../node && npm ci
-        cd ../workers && npm ci
+        npm ci --prefix apps/public
+        npm ci --prefix apps/admin
+        npm ci --prefix node
+        npm ci --prefix workers
     
     - name: Check Node version
       run: node --version
     
     - name: Lint check (if available)
-      run: |
-        if [ -f "package.json" ] && grep -q "\"lint\"" package.json; then
-          npm run lint || echo "Lint not configured, skipping"
-        else
-          echo "No lint script found, skipping"
-        fi
+      run: npm run lint --if-present
       continue-on-error: true
     
     - name: Build public app
@@ -55,10 +50,5 @@ jobs:
       run: npm run build:admin
     
     - name: Test (if available)
-      run: |
-        if [ -f "package.json" ] && grep -q "\"test\"" package.json; then
-          npm test || echo "Tests not configured or failed"
-        else
-          echo "No test script found, skipping"
-        fi
+      run: npm test --if-present
       continue-on-error: true
