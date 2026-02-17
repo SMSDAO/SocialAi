@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SocialAi Admin</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: #0d1117;
+            color: #c9d1d9;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+        
+        .header {
+            background: #161b22;
+            padding: 16px 24px;
+            border-bottom: 1px solid #30363d;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .logo {
+            font-size: 20px;
+            font-weight: 600;
+            color: #58a6ff;
+        }
+        
+        .status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: #3fb950;
+            border-radius: 50%;
+        }
+        
+        .container {
+            flex: 1;
+            display: flex;
+            overflow: hidden;
+        }
+        
+        .sidebar {
+            width: 260px;
+            background: #0d1117;
+            border-right: 1px solid #30363d;
+            padding: 16px;
+        }
+        
+        .nav-item {
+            padding: 8px 12px;
+            margin-bottom: 4px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.2s;
+            color: #c9d1d9;
+        }
+        
+        .nav-item:hover {
+            background: #161b22;
+        }
+        
+        .nav-item.active {
+            background: #1f6feb;
+            color: white;
+        }
+        
+        .main-content {
+            flex: 1;
+            padding: 24px;
+            overflow-y: auto;
+        }
+        
+        .card {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+        
+        .card-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #c9d1d9;
+        }
+        
+        .button {
+            background: #238636;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.2s;
+        }
+        
+        .button:hover {
+            background: #2ea043;
+        }
+        
+        .iframe-container {
+            width: 100%;
+            height: calc(100vh - 120px);
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+        
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">🌐 SocialAi Admin</div>
+        <div class="status">
+            <div class="status-dot"></div>
+            <span>Connected</span>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="sidebar">
+            <div class="nav-item active" onclick="showView('dashboard')">📊 Dashboard</div>
+            <div class="nav-item" onclick="showView('features')">🎛️ Feature Flags</div>
+            <div class="nav-item" onclick="showView('sync')">🔄 Sync Controls</div>
+            <div class="nav-item" onclick="showView('workers')">⚙️ Worker Health</div>
+            <div class="nav-item" onclick="showView('logs')">📝 Logs</div>
+            <div class="nav-item" onclick="showView('settings')">⚙️ Settings</div>
+        </div>
+        
+        <div class="main-content">
+            <div class="card">
+                <div class="card-title">Admin Dashboard</div>
+                <p style="margin-bottom: 12px;">
+                    This desktop admin app provides local control of the SocialAi system.
+                </p>
+                <button class="button" onclick="openAdminUI()">Open Admin UI in Browser</button>
+            </div>
+            
+            <div class="card">
+                <div class="card-title">Embedded Admin Console</div>
+                <div class="iframe-container">
+                    <iframe src="http://localhost:4200" title="Admin Console"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function showView(view) {
+            const items = document.querySelectorAll('.nav-item');
+            items.forEach(item => item.classList.remove('active'));
+            event.target.classList.add('active');
+            console.log('Showing view:', view);
+        }
+        
+        function openAdminUI() {
+            if (window.__TAURI__) {
+                window.__TAURI__.shell.open('http://localhost:4200');
+            } else {
+                window.open('http://localhost:4200', '_blank');
+            }
+        }
+    </script>
+</body>
+</html>
