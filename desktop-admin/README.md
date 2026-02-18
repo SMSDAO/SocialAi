@@ -19,9 +19,11 @@ This is a lightweight desktop admin application built with Tauri for Windows.
 ### Building for Windows
 
 #### 1. Install Rust
-```bash
-# Install via rustup
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+```powershell
+# For Windows, download and run rustup-init.exe from:
+# https://rustup.rs/
+# Or use winget:
+winget install Rustlang.Rustup
 ```
 
 #### 2. Install dependencies
