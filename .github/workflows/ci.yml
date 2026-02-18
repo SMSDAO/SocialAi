@@ -29,13 +29,6 @@ jobs:
     - name: Install root dependencies
       run: npm ci
     
-    - name: Install workspace dependencies
-      run: |
-        npm ci --prefix apps/public
-        npm ci --prefix apps/admin
-        npm ci --prefix node
-        npm ci --prefix workers
-    
     - name: Check Node version
       run: node --version
     
