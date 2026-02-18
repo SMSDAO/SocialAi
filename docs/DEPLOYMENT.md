@@ -161,7 +161,7 @@ The `vercel.json` file is already configured with:
 - Node.js 24 runtime
 - Optimized build settings
 - Correct output directory
-- Static file serving
+- Production-ready deployment settings for the Astro frontend
 
 ### Custom Domain
 
