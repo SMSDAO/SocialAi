@@ -13,17 +13,17 @@ It is built on a **parallel, auto‑healing, one‑file node architecture** powe
 
 ### Public App
 <!-- Screenshot: Public timeline and profile pages -->
-![Public App Screenshot](docs/screenshots/public-app.png)
+> Screenshot coming soon. Once available, add it as `docs/screenshots/public-app.png` and replace this note with an embedded image.
 *Modern GitHub-inspired dark theme for public profiles and timelines*
 
 ### Admin Console
 <!-- Screenshot: Admin dashboard with metrics -->
-![Admin Dashboard Screenshot](docs/screenshots/admin-dashboard.png)
+> Screenshot coming soon. Once available, add it as `docs/screenshots/admin-dashboard.png` and replace this note with an embedded image.
 *Real-time system metrics and worker health monitoring*
 
 ### Desktop Admin App
 <!-- Screenshot: Windows desktop app -->
-![Desktop Admin Screenshot](docs/screenshots/desktop-admin.png)
+> Screenshot coming soon. Once available, add it as `docs/screenshots/desktop-admin.png` and replace this note with an embedded image.
 *Native Windows admin app built with Tauri*
 
 ---
