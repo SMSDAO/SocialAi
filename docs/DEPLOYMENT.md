@@ -127,11 +127,7 @@ The public frontend app is optimized for Vercel with Node.js 24 runtime.
 
 3. **Set Environment Variables**:
    ```
-   DATABASE_URL=your_postgres_connection_string
-   JWT_SECRET=your_jwt_secret
-   SESSION_SECRET=your_session_secret
    API_URL=your_backend_api_url
-   OPENAI_API_KEY=your_openai_key (optional)
    NODE_ENV=production
    ```
 
