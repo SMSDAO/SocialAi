@@ -4,13 +4,9 @@
  * Works on Windows, macOS, and Linux
  */
 
-import { execSync } from 'child_process';
-import { existsSync } from 'fs';
-import { resolve, dirname } from 'path';
-import { fileURLToPath } from 'url';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+const { execSync } = require('child_process');
+const { existsSync } = require('fs');
+const { resolve } = require('path');
 
 console.log('🚀 Building SocialAi Desktop Admin for Windows...\n');
 

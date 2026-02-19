@@ -5,6 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SocialAi Admin</title>
     <style>
+        :root {
+            --gh-canvas-default: #0d1117;
+            --gh-canvas-subtle: #161b22;
+            --gh-border-default: #30363d;
+            --gh-fg-default: #c9d1d9;
+            --gh-fg-muted: #8b949e;
+            --gh-accent-fg: #58a6ff;
+            --gh-success-fg: #3fb950;
+        }
+        
         * {
             margin: 0;
             padding: 0;
@@ -13,17 +23,17 @@
         
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background: #0d1117;
-            color: #c9d1d9;
+            background: var(--gh-canvas-default);
+            color: var(--gh-fg-default);
             display: flex;
             flex-direction: column;
             height: 100vh;
         }
         
         .header {
-            background: #161b22;
+            background: var(--gh-canvas-subtle);
             padding: 16px 24px;
-            border-bottom: 1px solid #30363d;
+            border-bottom: 1px solid var(--gh-border-default);
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -32,7 +42,7 @@
         .logo {
             font-size: 20px;
             font-weight: 600;
-            color: #58a6ff;
+            color: var(--gh-accent-fg);
         }
         
         .status {

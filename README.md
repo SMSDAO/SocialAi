@@ -214,12 +214,10 @@ The `vercel.json` configuration is already set up with:
 
 #### Environment Variables for Vercel
 
-Configure these in your Vercel project settings:
-- `DATABASE_URL` - PostgreSQL connection string
-- `JWT_SECRET` - JWT signing secret
-- `SESSION_SECRET` - Session encryption secret
-- `API_URL` - Backend API URL
-- `OPENAI_API_KEY` - Optional, for AI features
+Configure these in your Vercel project settings (frontend only):
+- `PUBLIC_API_URL` - Backend API URL (e.g., https://api.yourdomain.com)
+
+**Note**: Backend secrets (`DATABASE_URL`, `JWT_SECRET`, `SESSION_SECRET`) should only be configured in your backend deployment environment (Railway, Render, etc.), not in Vercel frontend settings.
 
 ### Backend Deployment
 
@@ -234,7 +232,7 @@ The backend can be deployed to any Node.js 24+ hosting provider:
 
 Automated workflows are configured in `.github/workflows/`:
 - ✅ **CI**: Runs on every push/PR (Node 24 checks, builds)
-- ✅ **Deploy**: Runs on main branch pushes
+- ⚠️ **Deploy**: Workflow exists but requires Vercel token configuration
 
 ### Production Checklist
 

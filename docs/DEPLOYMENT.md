@@ -332,8 +332,8 @@ su - deploy
 ### 2. Install Dependencies
 
 ```bash
-# Install Node.js 18.x
-curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+# Install Node.js 24.x
+curl -fsSL https://deb.nodesource.com/setup_24.x | sudo -E bash -
 sudo apt-get install -y nodejs
 
 # Install PostgreSQL 14
@@ -499,11 +499,13 @@ pm2 logs
 
 ## Docker Deployment
 
+**Note**: Docker is not the recommended deployment method for this project. The production-ready approach uses Vercel for the frontend and Railway/Render for the backend. However, if you need Docker, update all base images to Node 24:
+
 ### 1. Create Dockerfile for Backend
 
 ```dockerfile
 # Dockerfile.backend
-FROM node:18-alpine
+FROM node:24-alpine
 
 WORKDIR /app
 
@@ -531,7 +533,7 @@ CMD ["node", "socialai.node.js"]
 
 ```dockerfile
 # Dockerfile.public
-FROM node:18-alpine
+FROM node:24-alpine
 
 WORKDIR /app
 
@@ -556,7 +558,7 @@ CMD ["node", "dist/server/entry.mjs"]
 
 ```dockerfile
 # Dockerfile.admin
-FROM node:18-alpine as build
+FROM node:24-alpine as build
 
 WORKDIR /app
 
