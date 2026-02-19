@@ -1,28 +1,9 @@
 {
   "version": 2,
-  "framework": "astro",
   "buildCommand": "npm run build:public",
   "outputDirectory": "apps/public/dist",
   "installCommand": "npm install",
   "devCommand": "npm run dev:public",
-  "builds": [
-    {
-      "src": "apps/public/package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "dist"
-      }
-    }
-  ],
-  "routes": [
-    {
-      "handle": "filesystem"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/apps/public/$1"
-    }
-  ],
   "regions": ["iad1"],
   "env": {
     "NODE_VERSION": "24"

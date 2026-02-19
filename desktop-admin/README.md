@@ -7,7 +7,6 @@ This is a lightweight desktop admin application built with Tauri for Windows.
 ### Features
 - Local admin control panel
 - Embedded admin UI from `http://localhost:4200`
-- System tray integration
 - Lightweight (<5MB installer)
 - Native Windows performance
 

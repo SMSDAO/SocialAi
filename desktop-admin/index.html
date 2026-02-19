@@ -164,7 +164,13 @@
                     Connecting to local admin UI at http://localhost:4200
                 </p>
                 <div class="iframe-container">
-                    <!-- Security Note: This iframe loads from localhost only, which is safe for a local desktop app -->
+                    <!-- Security Note: This iframe loads from localhost only for local desktop app use.
+                         The sandbox attributes (allow-same-origin + allow-scripts) effectively reduce 
+                         sandbox security benefits, but this is acceptable here because:
+                         1. The iframe loads from a trusted local source (localhost:4200)
+                         2. This is a local-only desktop app, not exposed to the internet
+                         3. The user controls both the desktop app and the admin UI running locally
+                         4. CSP policy in tauri.conf.json restricts connections to localhost only -->
                     <iframe 
                         src="http://localhost:4200" 
                         title="Admin Console"

@@ -17,7 +17,7 @@
     "build:public": "cd apps/public && npm run build",
     "build:admin": "cd apps/admin && npm run build",
     "build:desktop": "cd desktop-admin && npm run build",
-    "build:desktop:windows": "bash scripts/build-desktop-admin.sh",
+    "build:desktop:windows": "node scripts/build-desktop-admin.js",
     "db:init": "psql -U postgres -f db/schema.sql",
     "setup": "node scripts/setup.js"
   },
