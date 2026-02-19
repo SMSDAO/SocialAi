@@ -27,7 +27,7 @@ jobs:
         cache: 'npm'
     
     - name: Install root dependencies
-      run: npm ci
+      run: npm install
     
     - name: Check Node version
       run: node --version
