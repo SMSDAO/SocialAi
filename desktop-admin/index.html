@@ -192,7 +192,7 @@
         }
         
         function openAdminUI() {
-            if (window.__TAURI__) {
+            if (window.__TAURI__ && window.__TAURI__.shell && typeof window.__TAURI__.shell.open === 'function') {
                 window.__TAURI__.shell.open('http://localhost:4200');
             } else {
                 window.open('http://localhost:4200', '_blank');
