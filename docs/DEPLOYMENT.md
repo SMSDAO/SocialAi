@@ -264,17 +264,10 @@ Located in: `desktop-admin/src-tauri/target/release/bundle/`
 
 ### Auto-Updates
 
-Configure auto-updates in `desktop-admin/src-tauri/tauri.conf.json`:
-```json
-{
-  "updater": {
-    "active": true,
-    "endpoints": ["https://yourdomain.com/releases"],
-    "dialog": true
-  }
-}
-```
+For Tauri 2.x, auto-updates for the desktop admin app must be configured using the Tauri 2 updater system (either via `bundle.updater` in `desktop-admin/src-tauri/tauri.conf.json` or the official updater plugin).
 
+Refer to the official Tauri 2 documentation for the exact configuration format and recommended update distribution setup:
+https://tauri.app/v2/guides/distribution/updater/
 ---
 
 ## Deployment Options
