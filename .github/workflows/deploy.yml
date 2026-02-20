@@ -26,5 +26,6 @@ jobs:
     - name: Build
       run: npm run build
     
-    - name: Deploy to Vercel
-      run: echo "Vercel deployment configured via vercel.json"
+    # Deployment to Vercel is currently performed outside this workflow.
+    # TODO: Implement automated Vercel deployment via Vercel CLI or GitHub Action
+    #       once the required Vercel token/credentials are configured.
