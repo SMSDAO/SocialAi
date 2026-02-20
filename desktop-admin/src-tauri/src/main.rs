@@ -9,18 +9,11 @@ fn get_system_info() -> String {
     format!("SocialAi Admin v{}", env!("CARGO_PKG_VERSION"))
 }
 
-// Command to open external URL
-#[tauri::command]
-fn open_admin_dashboard() -> Result<(), String> {
-    Ok(())
-}
-
 fn main() {
     tauri::Builder::default()
         .plugin(tauri_plugin_shell::init())
         .invoke_handler(tauri::generate_handler![
-            get_system_info,
-            open_admin_dashboard
+            get_system_info
         ])
         .setup(|app| {
             #[cfg(debug_assertions)]
