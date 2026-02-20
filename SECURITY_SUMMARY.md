@@ -12,7 +12,7 @@
 
 #### 1. Iframe HTTP Connection to Localhost (Low Risk)
 **Alert:** `js/functionality-from-untrusted-source`
-**Location:** `desktop-admin/index.html:168`
+**Location:** `desktop-admin/index.html:184`
 
 **Status:** ACCEPTED - By Design
 
