@@ -231,7 +231,7 @@ The backend can be deployed to any Node.js 24+ hosting provider:
 ### GitHub Actions CI/CD
 
 Automated workflows are configured in `.github/workflows/`:
-- ✅ **CI**: Runs on every push/PR (Node 24 checks, builds)
+- ✅ **CI**: Runs on every push/PR (Node 20 checks, builds). Note: CI currently uses Node.js 20; update `.github/workflows/ci.yml` separately to validate against Node.js 24+.
 - ⚠️ **Deploy**: Workflow exists but requires Vercel token configuration
 
 ### Production Checklist
