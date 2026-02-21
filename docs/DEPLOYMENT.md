@@ -168,13 +168,17 @@ The `vercel.json` file is already configured with:
 
 ### Environment Variables
 
-Configure in Vercel Dashboard:
+Configure in Vercel Dashboard (frontend only):
 1. Project Settings → Environment Variables
-2. Add each variable from `.env.example`
-3. Select environment (Production, Preview, Development)
-4. Save
+2. Add **only** the `PUBLIC_API_URL` variable
+3. Set its value to the public base URL of your backend API (e.g. your Railway/Render backend URL)
+4. Select environment (Production, Preview, Development)
+5. Save
 
-**Important**: Never commit secrets to the repository. Use Vercel's environment variable system.
+**Important**:
+- Do **not** add backend secrets from `.env.example` (e.g. `DATABASE_URL`, `JWT_SECRET`, `SESSION_SECRET`) to the Vercel frontend project.
+- Configure backend-only secrets **only** in your backend deployment environment (Railway, Render, etc.).
+- Never commit secrets to the repository. Always use your platform's environment variable system.
 
 ---
 
