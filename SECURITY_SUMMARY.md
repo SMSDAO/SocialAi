@@ -39,7 +39,7 @@ The desktop admin app loads an iframe from `http://localhost:4200`. This is inte
 ✅ **Environment Variables**: All secrets use PLACEHOLDER_ prefix in .env.example
 ✅ **GitHub Actions**: Minimal permissions with explicit permissions blocks
 ✅ **CSP**: Content Security Policy configured in Tauri app
-✅ **Node.js 24+**: Latest LTS version with security updates
+✅ **Node.js (LTS)**: Uses a currently supported LTS release with security updates
 ✅ **Dependencies**: Regular package updates recommended
 ✅ **No Secrets Committed**: Verified no actual secrets in repository
 
