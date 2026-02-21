@@ -36,7 +36,7 @@ The desktop admin app loads an iframe from `http://localhost:4200`. This is inte
 
 ### Security Best Practices Implemented
 
-✅ **Environment Variables**: All secrets use PLACEHOLDER_ prefix in .env.example
+✅ **Environment Variables**: All secrets use placeholder patterns (PLACEHOLDER_* or YOUR_*) in .env.example
 ✅ **GitHub Actions**: Minimal permissions with explicit permissions blocks
 ✅ **CSP**: Content Security Policy configured in Tauri app
 ✅ **Node.js (LTS)**: Uses a currently supported LTS release with security updates
