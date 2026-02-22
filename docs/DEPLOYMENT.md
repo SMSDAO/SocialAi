@@ -53,7 +53,7 @@ node --version  # Should output v24.x.x or higher
 
 **Not Recommended:**
 - ❌ Platforms that don't support Node 24+
-- ❌ Heroku (unless updated runtime available)
+- ❌ Platform tiers or providers where Node 24+ runtimes are not available
 
 ---
 
