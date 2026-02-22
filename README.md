@@ -162,6 +162,7 @@ npm run dev:admin          # Admin Console (port 4200)
 npm run dev:desktop        # Desktop Admin App (Windows)
 ```
 
+> Note: These manual steps mirror what the automated setup script (`npm run setup`) does internally. You can either run `npm run setup` or follow the commands above manually—both paths achieve the same result.
 ### Access Points
 
 - 🔌 **Backend API**: http://localhost:3000
