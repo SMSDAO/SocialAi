@@ -159,6 +159,20 @@ The `vercel.json` file is already configured with:
 - Correct output directory
 - Production-ready deployment settings for the Astro frontend
 
+**Important:** Before deploying to Vercel, update `apps/public/astro.config.mjs` to use the `@astrojs/vercel` adapter:
+
+```javascript
+import vercel from '@astrojs/vercel/serverless';
+
+export default defineConfig({
+  output: 'server',
+  adapter: vercel(),  // Use vercel adapter for Vercel deployment
+  // ... rest of config
+});
+```
+
+The `@astrojs/vercel` package is already installed. Simply uncomment the vercel adapter line and comment out the node adapter in the config file before deploying to Vercel.
+
 ### Custom Domain
 
 1. Go to Project Settings → Domains
