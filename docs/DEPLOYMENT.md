@@ -127,7 +127,7 @@ The public frontend app is optimized for Vercel with Node.js 24 runtime.
 
 3. **Set Environment Variables**:
    ```
-   API_URL=your_backend_api_url
+   PUBLIC_API_URL=your_backend_api_url
    NODE_ENV=production
    ```
 
