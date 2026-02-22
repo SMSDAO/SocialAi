@@ -232,7 +232,7 @@ The backend can be deployed to any Node.js 24+ hosting provider:
 
 Automated workflows are configured in `.github/workflows/`:
 - ✅ **CI**: Runs on every push/PR (Node 20 checks, builds). Note: CI currently uses Node.js 20; update `.github/workflows/ci.yml` separately to validate against Node.js 24+.
-- ⚠️ **Deploy**: Workflow exists but requires Vercel token configuration
+- ⚠️ **Deploy**: Workflow exists and currently runs build checks only; Vercel deployment is not yet implemented (TODO and will require Vercel token configuration once enabled).
 
 ### Production Checklist
 
