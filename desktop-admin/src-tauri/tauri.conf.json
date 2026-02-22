@@ -34,6 +34,8 @@
       }
     ],
     "security": {
+      // NOTE: 'unsafe-inline' is intentionally allowed here as an accepted trade-off for this local-only desktop app,
+      // where content is loaded from trusted localhost sources and inline scripts/styles are required by the embedded UI.
       "csp": "default-src 'self' 'unsafe-inline'; connect-src 'self' http://localhost:3000 http://localhost:4200; frame-src http://localhost:4200"
     }
   }
