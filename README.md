@@ -5,6 +5,27 @@ SocialAi is a lightweight, AI‑powered social discovery engine that mirrors pub
 
 It is built on a **parallel, auto‑healing, one‑file node architecture** powered by Healdec and SmartBrain.
 
+**Built with Node.js 24+ | Production-Ready | Modern GitHub-Style UI**
+
+---
+
+## 📸 Screenshots
+
+### Public App
+<!-- Screenshot: Public timeline and profile pages -->
+> Screenshot coming soon. Once available, add it as `docs/screenshots/public-app.png` and replace this note with an embedded image.
+*Modern GitHub-inspired dark theme for public profiles and timelines*
+
+### Admin Console
+<!-- Screenshot: Admin dashboard with metrics -->
+> Screenshot coming soon. Once available, add it as `docs/screenshots/admin-dashboard.png` and replace this note with an embedded image.
+*Real-time system metrics and worker health monitoring*
+
+### Desktop Admin App
+<!-- Screenshot: Windows desktop app -->
+> Screenshot coming soon. Once available, add it as `docs/screenshots/desktop-admin.png` and replace this note with an embedded image.
+*Native Windows admin app built with Tauri*
+
 ---
 
 ## ✨ Features
@@ -14,6 +35,7 @@ It is built on a **parallel, auto‑healing, one‑file node architecture** powe
 - Google‑indexable pages  
 - Zero‑JS by default (Astro + Vite)  
 - Fast SSR for timelines and profiles  
+- GitHub-inspired dark theme UI
 
 ### 🪪 Identity Claim System
 - Farcaster Sign‑In  
@@ -46,6 +68,7 @@ It is built on a **parallel, auto‑healing, one‑file node architecture** powe
 - Logs  
 - Worker health  
 - Abuse controls  
+- **NEW: Desktop Windows app (Tauri)**
 
 ---
 
@@ -90,27 +113,53 @@ For a detailed architecture diagram and component descriptions, see [docs/ARCHIT
 
 ## 🚀 Getting Started
 
-### Quick Start
+### Prerequisites
+- **Node.js 24+** (specified in `.nvmrc`)
+- PostgreSQL 12+
+- npm 10+
+
+### One-Click Setup
 
 ```bash
 git clone https://github.com/SMSDAO/SocialAi.git
 cd SocialAi
 
-# Install dependencies
+# Automated setup (zero-error, one-click)
+npm run setup
+```
+
+The setup script will:
+- ✅ Check Node.js version (24+)
+- ✅ Create `.env` from `.env.example`
+- ✅ Install all dependencies
+- ✅ Validate configuration
+
+### Manual Setup
+
+```bash
+# 1. Clone the repository
+git clone https://github.com/SMSDAO/SocialAi.git
+cd SocialAi
+
+# 2. Use Node.js 24+
+nvm use  # Reads from .nvmrc
+
+# 3. Install dependencies
 npm install
 
-# Setup database
+# 4. Setup database
 createdb socialai
 psql -U postgres -d socialai -f db/schema.sql
 
-# Configure environment
+# 5. Configure environment
 cp .env.example .env
-# Edit .env with your settings
+# Edit .env with your settings (see .env.example for all options)
 
-# Start the system
+# 6. Start the system
 npm run dev                # Backend + Workers
 npm run dev:public         # Public App (port 4321)
 npm run dev:admin          # Admin Console (port 4200)
+npm run dev:desktop        # Desktop Admin App (Windows)
 ```
 
 ### Access Points
@@ -118,8 +167,86 @@ npm run dev:admin          # Admin Console (port 4200)
 - 🔌 **Backend API**: http://localhost:3000
 - 🌐 **Public App**: http://localhost:4321
 - ⚙️ **Admin Console**: http://localhost:4200
+- 🖥️ **Desktop Admin**: Native Windows app (via Tauri)
+
+### Desktop Admin App (Windows)
+
+Build the native Windows admin app:
+
+```bash
+# Prerequisites: Rust toolchain + Node.js 24+
+npm run build:desktop:windows
+```
+
+The installer will be created in `desktop-admin/src-tauri/target/release/bundle/`:
+- `admin.msi` - MSI installer
+- `admin-setup.exe` - NSIS installer
+
+For detailed desktop app documentation, see [desktop-admin/README.md](desktop-admin/README.md).
 
 For detailed setup instructions, see [docs/INSTALLATION.md](docs/INSTALLATION.md).
+
+---
+
+## 🚀 Deployment
+
+### Vercel Deployment (Frontend)
+
+The public frontend is optimized for Vercel deployment with Node.js 24 runtime.
+
+#### Quick Deploy to Vercel
+
+1. **Install Vercel CLI**:
+```bash
+npm install -g vercel
+```
+
+2. **Deploy**:
+```bash
+vercel
+```
+
+The `vercel.json` configuration is already set up with:
+- ✅ Node.js 24 runtime
+- ✅ Optimized build settings
+- ✅ Correct output directory
+- ✅ Environment variable placeholders
+
+#### Environment Variables for Vercel
+
+Configure these in your Vercel project settings (frontend only):
+- `PUBLIC_API_URL` - Backend API URL (e.g., https://api.yourdomain.com)
+
+**Note**: Backend secrets (`DATABASE_URL`, `JWT_SECRET`, `SESSION_SECRET`) should only be configured in your backend deployment environment (Railway, Render, etc.), not in Vercel frontend settings.
+
+### Backend Deployment
+
+The backend can be deployed to any Node.js 24+ hosting provider:
+
+- **Recommended**: Railway, Render, Fly.io
+- **Requirements**: Node.js 24+, PostgreSQL 12+
+- **Build command**: `npm install`
+- **Start command**: `npm run dev`
+
+### GitHub Actions CI/CD
+
+Automated workflows are configured in `.github/workflows/`:
+- ✅ **CI**: Runs on every push/PR (Node 20 checks, builds). Note: CI currently uses Node.js 20; update `.github/workflows/ci.yml` separately to validate against Node.js 24+.
+- ⚠️ **Deploy**: Workflow exists and currently runs build checks only; Vercel deployment is not yet implemented (TODO and will require Vercel token configuration once enabled).
+
+### Production Checklist
+
+- [ ] Set `NODE_ENV=production` in environment
+- [ ] Configure production database
+- [ ] Set strong JWT and session secrets
+- [ ] Configure CORS origins
+- [ ] Enable rate limiting
+- [ ] Set up monitoring and logging
+- [ ] Review security settings
+
+For detailed deployment instructions, see [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md).
+
+---
 
 ## 📚 Documentation
 

@@ -1,0 +1,31 @@
+name: Deploy
+
+on:
+  push:
+    branches: [ main ]
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Use Node.js 24.x
+      uses: actions/setup-node@v4
+      with:
+        node-version: 24.x
+        cache: 'npm'
+    
+    - name: Install dependencies
+      run: npm install
+    
+    - name: Build
+      run: npm run build
+    
+    # Deployment to Vercel is currently performed outside this workflow.
+    # TODO: Implement automated Vercel deployment via Vercel CLI or GitHub Action
+    #       once the required Vercel token/credentials are configured.

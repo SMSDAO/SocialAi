@@ -1,5 +1,13 @@
 .dashboard-header {
   margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.dashboard-header h2 {
+  color: var(--text-primary);
+  font-size: 1.75rem;
+  margin-bottom: 0.5rem;
 }
 
 .text-secondary {
@@ -29,15 +37,16 @@
 
 .progress-bar {
   height: 0.5rem;
-  background-color: var(--border-color);
-  border-radius: 9999px;
+  background-color: rgba(48, 54, 61, 0.5);
+  border-radius: 6px;
   overflow: hidden;
 }
 
 .progress-fill {
   height: 100%;
-  background-color: var(--primary-color);
+  background: linear-gradient(90deg, var(--primary-color), var(--primary-light));
   transition: width 0.3s ease;
+  border-radius: 6px;
 }
 
 .progress-warning {
@@ -57,8 +66,14 @@
   display: flex;
   align-items: center;
   padding: 0.75rem;
-  background-color: var(--background);
-  border-radius: 0.375rem;
+  background-color: var(--surface-light);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  transition: background-color 0.2s;
+}
+
+.worker-status-item:hover {
+  background-color: var(--surface);
 }
 
 .worker-status-info {
@@ -86,9 +101,16 @@
   align-items: center;
   gap: 1rem;
   padding: 0.75rem;
-  background-color: var(--background);
-  border-radius: 0.375rem;
+  background-color: var(--surface-light);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
   font-size: 0.875rem;
+  transition: border-color 0.2s;
+}
+
+.activity-item:hover {
+  border-color: var(--border-color-light);
+  background-color: var(--surface);
 }
 
 .activity-item > span:nth-child(2) {

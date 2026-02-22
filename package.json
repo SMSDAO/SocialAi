@@ -12,10 +12,14 @@
     "dev": "node node/socialai.node.js",
     "dev:public": "cd apps/public && npm run dev",
     "dev:admin": "cd apps/admin && npm start",
+    "dev:desktop": "cd desktop-admin && npm run dev",
     "build": "npm run build:public && npm run build:admin",
     "build:public": "cd apps/public && npm run build",
     "build:admin": "cd apps/admin && npm run build",
-    "db:init": "psql -U postgres -f db/schema.sql"
+    "build:desktop": "cd desktop-admin && npm run build",
+    "build:desktop:windows": "node scripts/build-desktop-admin.js",
+    "db:init": "psql -U postgres -f db/schema.sql",
+    "setup": "node scripts/setup.js"
   },
   "keywords": [
     "social",
@@ -24,5 +28,9 @@
     "ai"
   ],
   "author": "SocialAi Team",
-  "license": "MIT"
+  "license": "MIT",
+  "engines": {
+    "node": ">=24.0.0",
+    "npm": ">=10.0.0"
+  }
 }

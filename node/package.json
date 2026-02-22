@@ -15,5 +15,9 @@
     "cors": "^2.8.5",
     "helmet": "^7.1.0",
     "express-rate-limit": "^7.1.5"
+  },
+  "engines": {
+    "node": ">=24.0.0",
+    "npm": ">=10.0.0"
   }
 }
