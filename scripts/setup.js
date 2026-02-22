@@ -60,8 +60,15 @@ try {
   execSync('npm install', { cwd: rootDir, stdio: 'inherit' });
   console.log('✅ Dependencies installed\n');
 } catch (error) {
-  console.error('❌ Failed to install dependencies');
-  process.exit(1);
+  console.warn('⚠️  Standard install failed, retrying with --legacy-peer-deps...');
+  try {
+    execSync('npm install --legacy-peer-deps', { cwd: rootDir, stdio: 'inherit' });
+    console.log('✅ Dependencies installed with --legacy-peer-deps\n');
+  } catch (retryError) {
+    console.error('❌ Failed to install dependencies');
+    console.error('   Try running: npm install --legacy-peer-deps');
+    process.exit(1);
+  }
 }
 
 // Summary
