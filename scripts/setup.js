@@ -40,10 +40,12 @@ console.log('🔍 Checking environment configuration...');
 const envContent = fs.readFileSync(envFile, 'utf8');
 const requiredVars = ['DATABASE_URL', 'JWT_SECRET', 'SESSION_SECRET'];
 const missingVars = requiredVars.filter(varName => {
-  const regex = new RegExp(`^${varName}=.+$`, 'm');
-  return !regex.test(envContent) || 
-         envContent.includes(`${varName}=PLACEHOLDER_`) ||
-         envContent.includes(`${varName}=YOUR_`);
+  const regex = new RegExp(`^${varName}=(.+)$`, 'm');
+  const match = regex.exec(envContent);
+  if (!match) return true;
+  const value = match[1];
+  // Check if value contains PLACEHOLDER_ anywhere (not just at start)
+  return value.includes('PLACEHOLDER_') || value.includes('YOUR_');
 });
 
 if (missingVars.length > 0) {

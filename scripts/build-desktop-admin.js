@@ -50,10 +50,23 @@ try {
 
 // Build for Windows
 console.log('🔨 Building for Windows...');
+
+// Check platform and warn if not Windows
+const platform = process.platform;
+if (platform !== 'win32') {
+  console.warn('⚠️  WARNING: Building Windows target on non-Windows platform');
+  console.warn('   This requires Windows cross-compilation toolchain');
+  console.warn('   Recommended: Run this build on a Windows machine\n');
+}
+
 try {
   execSync('npm run build:windows', { stdio: 'inherit' });
 } catch (error) {
   console.error('❌ Build failed');
+  if (platform !== 'win32') {
+    console.error('\n💡 Tip: Windows builds work best on Windows hosts');
+    console.error('   For cross-compilation setup, see: https://tauri.app/v1/guides/building/cross-platform');
+  }
   process.exit(1);
 }
 

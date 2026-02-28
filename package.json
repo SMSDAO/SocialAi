@@ -6,7 +6,8 @@
   "workspaces": [
     "apps/*",
     "node",
-    "workers"
+    "workers",
+    "desktop-admin"
   ],
   "scripts": {
     "dev": "node node/socialai.node.js",
