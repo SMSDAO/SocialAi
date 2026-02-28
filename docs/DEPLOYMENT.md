@@ -121,7 +121,7 @@ The public frontend app is optimized for Vercel with Node.js 24 runtime.
    Framework Preset: Astro
    Build Command: npm run build:public
    Output Directory: apps/public/dist
-   Install Command: npm install
+   Install Command: npm install --legacy-peer-deps
    Node Version: 24.x
    ```
 
