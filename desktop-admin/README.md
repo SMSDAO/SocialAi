@@ -40,7 +40,7 @@ npm run dev
 npm run build:windows
 ```
 
-The installer will be created in `src-tauri/target/release/bundle/`.
+The installer will be created in `src-tauri/target/<target-triple>/release/bundle/` (for example, `src-tauri/target/x86_64-pc-windows-msvc/release/bundle/`).
 
 ### Files
 - `admin.exe` - Main executable (located in bundle folder after build)
