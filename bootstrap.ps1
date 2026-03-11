@@ -4,6 +4,7 @@
 
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
+Set-Location -Path $PSScriptRoot
 
 Write-Host "=== SocialAi Bootstrap ===" -ForegroundColor Cyan
 
@@ -13,6 +14,10 @@ npm install
 if ($LASTEXITCODE -ne 0) {
     Write-Host "npm install failed, retrying with --legacy-peer-deps..." -ForegroundColor Yellow
     npm install --legacy-peer-deps
+    if ($LASTEXITCODE -ne 0) {
+        Write-Host "npm install failed even with --legacy-peer-deps. Aborting." -ForegroundColor Red
+        exit $LASTEXITCODE
+    }
 }
 Write-Host "Dependencies installed." -ForegroundColor Green
 

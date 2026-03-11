@@ -22,11 +22,9 @@ jobs:
 
       - name: Install dependencies
         run: npm install --legacy-peer-deps
-        working-directory: apps/public
 
       - name: Build public app
-        run: npm run build
-        working-directory: apps/public
+        run: npm run build:public
         env:
           PUBLIC_API_URL: ${{ secrets.PUBLIC_API_URL }}
 
@@ -52,11 +50,9 @@ jobs:
 
       - name: Install dependencies
         run: npm install --legacy-peer-deps
-        working-directory: apps/admin
 
       - name: Build admin app
-        run: npm run build
-        working-directory: apps/admin
+        run: npm run build:admin
 
       - name: Deploy admin app to Vercel
         uses: amondnet/vercel-action@v25
