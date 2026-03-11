@@ -1,0 +1,30 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "apps/public/astro.config.mjs",
+      "use": "@vercel/astro",
+      "config": {
+        "installCommand": "npm install --legacy-peer-deps"
+      }
+    },
+    {
+      "src": "apps/admin/package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "apps/admin/dist/socialai-admin/browser",
+        "buildCommand": "npm run build:admin"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/admin(.*)",
+      "dest": "/apps/admin/dist/socialai-admin/browser$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/apps/public/$1"
+    }
+  ]
+}
