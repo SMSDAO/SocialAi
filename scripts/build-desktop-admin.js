@@ -65,13 +65,13 @@ try {
   console.error('❌ Build failed');
   if (platform !== 'win32') {
     console.error('\n💡 Tip: Windows builds work best on Windows hosts');
-    console.error('   For cross-compilation setup, see: https://tauri.app/v1/guides/building/cross-platform');
+    console.error('   For cross-compilation setup, see: https://v2.tauri.app/guides/building/cross-platform/');
   }
   process.exit(1);
 }
 
 console.log('\n✅ Build complete!');
-console.log('📂 Installers are located in: desktop-admin/src-tauri/target/release/bundle/\n');
+console.log('📂 Installers are located in: desktop-admin/src-tauri/target/x86_64-pc-windows-msvc/release/bundle/\n');
 console.log('Available installers:');
 console.log('  - MSI: admin.msi');
 console.log('  - NSIS: admin-setup.exe\n');
