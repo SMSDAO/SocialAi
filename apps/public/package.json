@@ -12,7 +12,7 @@
     "astro": "^5.15.8"
   },
   "devDependencies": {
-    "@astrojs/node": "^9.0.0",
+    "@astrojs/node": "^10.0.5",
     "@astrojs/vercel": "^8.0.0",
     "@types/node": "^24.0.0",
     "typescript": "^5.3.3"
