@@ -15,19 +15,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: 'npm'
-
-      - name: Install dependencies
-        run: npm install --legacy-peer-deps
-
-      - name: Build public app
-        run: npm run build:public
-        env:
-          PUBLIC_API_URL: ${{ secrets.PUBLIC_API_URL }}
-
       - name: Deploy public app to Vercel
         uses: amondnet/vercel-action@v25
         with:
@@ -42,17 +29,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: 'npm'
-
-      - name: Install dependencies
-        run: npm install --legacy-peer-deps
-
-      - name: Build admin app
-        run: npm run build:admin
 
       - name: Deploy admin app to Vercel
         uses: amondnet/vercel-action@v25

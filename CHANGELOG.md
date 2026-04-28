@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Web3 wallet integration via RainbowKit, Wagmi and Viem in `apps/public`
+- Add Web3 dependencies (RainbowKit, Wagmi, Viem) to `apps/public`
 - Vercel deployment configuration (`vercel.json`) for `apps/public` (Astro SSR) and `apps/admin` (Angular)
 - GitHub Actions workflow for automated Vercel deployment on push to `main`
 - `bootstrap.ps1` PowerShell script for one-command local development setup

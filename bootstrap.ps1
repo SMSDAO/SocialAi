@@ -25,6 +25,10 @@ Write-Host "Dependencies installed." -ForegroundColor Green
 Write-Host "`n[2/3] Initialising database..." -ForegroundColor Yellow
 if (Get-Command psql -ErrorAction SilentlyContinue) {
     npm run db:init
+    if ($LASTEXITCODE -ne 0) {
+        Write-Host "db:init failed. Aborting." -ForegroundColor Red
+        exit $LASTEXITCODE
+    }
     Write-Host "Database initialised." -ForegroundColor Green
 } else {
     Write-Host "psql not found – skipping db:init. Install PostgreSQL and re-run, or run 'npm run db:init' manually." -ForegroundColor Yellow
