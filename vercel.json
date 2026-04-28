@@ -1,1 +1,16 @@
-{ "version": 2 }
+{
+  "version": 2,
+  "buildCommand": "npm run build:public",
+  "outputDirectory": "apps/public/dist",
+  "installCommand": "npm install --legacy-peer-deps",
+  "devCommand": "npm run dev:public",
+  "regions": ["iad1"],
+  "env": {
+    "NODE_VERSION": "24"
+  },
+  "build": {
+    "env": {
+      "NODE_VERSION": "24"
+    }
+  }
+}
