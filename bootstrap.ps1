@@ -10,12 +10,19 @@ Write-Host "=== SocialAi Bootstrap ===" -ForegroundColor Cyan
 
 # 1. Install all workspace dependencies
 Write-Host "`n[1/3] Installing dependencies..." -ForegroundColor Yellow
-npm install
-if ($LASTEXITCODE -ne 0) {
-    Write-Host "npm install failed, retrying with --legacy-peer-deps..." -ForegroundColor Yellow
-    npm install --legacy-peer-deps
+$hasPackageLock = Test-Path -Path "package-lock.json"
+if ($hasPackageLock) {
+    Write-Host "package-lock.json detected. Using 'npm ci' to match CI/production installs." -ForegroundColor Cyan
+    npm ci
     if ($LASTEXITCODE -ne 0) {
-        Write-Host "npm install failed even with --legacy-peer-deps. Aborting." -ForegroundColor Red
+        Write-Host "npm ci failed. Aborting." -ForegroundColor Red
+        exit $LASTEXITCODE
+    }
+} else {
+    Write-Host "package-lock.json not found. Using 'npm install'." -ForegroundColor Cyan
+    npm install
+    if ($LASTEXITCODE -ne 0) {
+        Write-Host "npm install failed. Aborting." -ForegroundColor Red
         exit $LASTEXITCODE
     }
 }

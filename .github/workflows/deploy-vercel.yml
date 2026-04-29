@@ -37,4 +37,4 @@ jobs:
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID_ADMIN }}
           working-directory: apps/admin
-          vercel-args: '--prod --prebuilt'
+          vercel-args: '--prod'
