@@ -1,36 +1,41 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-
-// Return empty array for SSR mode - profiles are dynamically rendered
-export async function getStaticPaths() {
-  return [];
-}
+import { getProfile, getProfilePosts } from '../../lib/mockData';
 
 const { username } = Astro.params;
-const API_URL = import.meta.env.PUBLIC_API_URL || 'http://localhost:3000';
+const API_URL = import.meta.env.PUBLIC_API_URL;
 
 let profile: any = null;
 let posts: any[] = [];
 let error = null;
 
-try {
-  const profileResponse = await fetch(`${API_URL}/api/profile/${username}`);
-  if (profileResponse.ok) {
-    profile = await profileResponse.json();
-    
-    // Fetch user's posts
-    const postsResponse = await fetch(`${API_URL}/api/profile/${username}/posts?limit=20`);
-    if (postsResponse.ok) {
-      posts = await postsResponse.json();
+if (API_URL) {
+  try {
+    const profileResponse = await fetch(`${API_URL}/api/profile/${username}`);
+    if (profileResponse.ok) {
+      profile = await profileResponse.json();
+      
+      // Fetch user's posts
+      const postsResponse = await fetch(`${API_URL}/api/profile/${username}/posts?limit=20`);
+      if (postsResponse.ok) {
+        posts = await postsResponse.json();
+      }
+    } else if (profileResponse.status === 404) {
+      error = 'Profile not found';
+    } else {
+      error = 'Failed to load profile';
     }
-  } else if (profileResponse.status === 404) {
-    error = 'Profile not found';
-  } else {
-    error = 'Failed to load profile';
+  } catch (err) {
+    console.error('Failed to fetch profile:', err);
+    error = 'Failed to connect to API';
   }
-} catch (err) {
-  console.error('Failed to fetch profile:', err);
-  error = 'Failed to connect to API';
+} else if (username) {
+  profile = getProfile(username) || null;
+  if (profile) {
+    posts = getProfilePosts(username, 20);
+  } else {
+    error = 'Profile not found';
+  }
 }
 
 const title = profile ? `${profile.displayName || profile.username} (@${username}) - SocialAi` : 'Profile Not Found';

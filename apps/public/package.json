@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
-    "dev": "astro dev",
-    "start": "astro dev",
+    "dev": "astro dev --host 0.0.0.0 --port 3000",
+    "start": "astro dev --host 0.0.0.0 --port 3000",
     "build": "astro build",
-    "preview": "astro preview"
+    "preview": "astro preview --host 0.0.0.0 --port 3000"
   },
   "dependencies": {
     "@rainbow-me/rainbowkit": "^2.2.7",
@@ -19,12 +19,11 @@
   },
   "devDependencies": {
     "@astrojs/node": "^9.0.0",
-    "@astrojs/vercel": "^8.0.0",
-    "@types/node": "^24.0.0",
+    "@types/node": "^22.0.0",
     "typescript": "^5.3.3"
   },
   "engines": {
-    "node": ">=24.0.0",
+    "node": ">=20.0.0",
     "npm": ">=10.0.0"
   }
 }

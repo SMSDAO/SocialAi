@@ -1,23 +1,26 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { listTimeline } from '../lib/mockData';
 
 const title = 'Timeline - SocialAi';
 const description = 'Discover the latest posts and activity from across the SocialAi network.';
 
-const API_URL = import.meta.env.PUBLIC_API_URL || 'http://localhost:3000';
-let posts: any[] = [];
+const API_URL = import.meta.env.PUBLIC_API_URL;
+let posts: any[] = listTimeline(50);
 let error = null;
 
-try {
-  const response = await fetch(`${API_URL}/api/timeline?limit=50`);
-  if (response.ok) {
-    posts = await response.json();
-  } else {
-    error = 'Failed to load timeline';
+if (API_URL) {
+  try {
+    const response = await fetch(`${API_URL}/api/timeline?limit=50`);
+    if (response.ok) {
+      posts = await response.json();
+    } else {
+      error = 'Failed to load timeline';
+    }
+  } catch (err) {
+    console.error('Failed to fetch timeline:', err);
+    error = 'Failed to connect to API';
   }
-} catch (err) {
-  console.error('Failed to fetch timeline:', err);
-  error = 'Failed to connect to API';
 }
 ---
 

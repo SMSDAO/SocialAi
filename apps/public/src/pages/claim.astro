@@ -359,7 +359,7 @@ const description = 'Verify your identity and claim your SocialAi profile throug
       submitBtn.textContent = 'Verifying...';
       
       try {
-        const API_URL = import.meta.env.PUBLIC_API_URL || 'http://localhost:3000';
+        const API_URL = import.meta.env.PUBLIC_API_URL || '';
         let endpoint = '';
         let body: any = {};
 

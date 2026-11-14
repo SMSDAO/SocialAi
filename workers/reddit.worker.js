@@ -12,9 +12,18 @@ import axios from 'axios';
 dotenv.config();
 
 const { Pool } = pg;
-const db = new Pool({
-  connectionString: process.env.DATABASE_URL || 'postgresql://postgres:postgres@localhost:5432/socialai'
-});
+let db;
+const mockDb = {
+  query: async () => ({ rows: [] }),
+  connect: async () => ({ query: async () => ({ rows: [] }), release: () => {} }),
+  end: async () => {}
+};
+try {
+  db = process.env.DATABASE_URL ? new Pool({ connectionString: process.env.DATABASE_URL }) : mockDb;
+} catch {
+  console.warn('DB not connected — mock active');
+  db = mockDb;
+}
 
 const REDDIT_API_URL = 'https://www.reddit.com';
 const SYNC_INTERVAL = 120000; // 2 minutes

@@ -1,23 +1,26 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { listProfiles } from '../lib/mockData';
 
 const title = 'Profiles - SocialAi';
 const description = 'Browse public profiles on SocialAi. Discover creators, developers, and communities across Farcaster and beyond.';
 
-const API_URL = import.meta.env.PUBLIC_API_URL || 'http://localhost:3000';
-let profiles = [];
+const API_URL = import.meta.env.PUBLIC_API_URL;
+let profiles = listProfiles(50);
 let error = null;
 
-try {
-  const response = await fetch(`${API_URL}/api/profiles?limit=50`);
-  if (response.ok) {
-    profiles = await response.json();
-  } else {
-    error = 'Failed to load profiles';
+if (API_URL) {
+  try {
+    const response = await fetch(`${API_URL}/api/profiles?limit=50`);
+    if (response.ok) {
+      profiles = await response.json();
+    } else {
+      error = 'Failed to load profiles';
+    }
+  } catch (err) {
+    console.error('Failed to fetch profiles:', err);
+    error = 'Failed to connect to API';
   }
-} catch (err) {
-  console.error('Failed to fetch profiles:', err);
-  error = 'Failed to connect to API';
 }
 ---
 

@@ -1,25 +1,23 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { getStats } from '../lib/mockData';
 
 const title = 'SocialAi - The Open Social Index & Identity Claim Network';
 const description = 'AI-powered social discovery engine that mirrors public Farcaster activity, blends Reddit timelines, and exposes SEO-optimized public profiles that you can claim.';
 
-// Fetch stats from API
-const API_URL = import.meta.env.PUBLIC_API_URL || 'http://localhost:3000';
-let stats = {
-  profiles: 0,
-  posts: 0,
-  claims: 0,
-  networks: 3
-};
+// Fetch stats from API when PUBLIC_API_URL is set, otherwise use local store
+const API_URL = import.meta.env.PUBLIC_API_URL;
+let stats = getStats();
 
-try {
-  const response = await fetch(`${API_URL}/api/stats`);
-  if (response.ok) {
-    stats = await response.json();
+if (API_URL) {
+  try {
+    const response = await fetch(`${API_URL}/api/stats`);
+    if (response.ok) {
+      stats = await response.json();
+    }
+  } catch (error) {
+    console.error('Failed to fetch stats:', error);
   }
-} catch (error) {
-  console.error('Failed to fetch stats:', error);
 }
 ---
 

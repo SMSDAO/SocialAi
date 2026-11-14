@@ -55,16 +55,32 @@ const CONFIG = {
 // ============================================================================
 
 const { Pool } = pg;
-const db = new Pool({ connectionString: CONFIG.dbUrl });
+let db;
+const mockDb = {
+  query: async () => ({ rows: [] }),
+  connect: async () => ({ query: async () => ({ rows: [] }), release: () => {} }),
+  end: async () => {}
+};
 
-// Test database connection
-db.query('SELECT NOW()', (err, res) => {
-  if (err) {
-    console.error('❌ Database connection failed:', err.message);
+try {
+  if (!process.env.DATABASE_URL) {
+    console.warn('[AI Studio] DATABASE_URL not set — PostgreSQL mock active');
+    db = mockDb;
   } else {
-    console.log('✅ Database connected:', res.rows[0].now);
+    db = new Pool({ connectionString: CONFIG.dbUrl });
+    db.query('SELECT NOW()', (err, res) => {
+      if (err) {
+        console.warn('[AI Studio] Database connection failed — falling back to mock:', err.message);
+        db = mockDb;
+      } else {
+        console.log('✅ Database connected:', res.rows[0].now);
+      }
+    });
   }
-});
+} catch {
+  console.warn('[AI Studio] DB not connected — mock active');
+  db = mockDb;
+}
 
 // ============================================================================
 // HEALDEC ENGINE
@@ -627,7 +643,7 @@ async function initialize() {
   workerManager.startHealthChecks();
   
   // Start API server
-  app.listen(CONFIG.port, () => {
+  app.listen(CONFIG.port, '0.0.0.0', () => {
     console.log('='.repeat(50));
     console.log(`✅ SocialAi Node running on port ${CONFIG.port}`);
     console.log(`📊 API Gateway: http://localhost:${CONFIG.port}`);
